@@ -7,11 +7,37 @@
 //
 
 import MapKit
-import CoreLocation
 import AVFoundation
 import AudioToolbox
 
 extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
+    
+    func loop() {
+        print("here")
+        if self.distance < 30 {
+            alarmSound?.stop()
+            alarmSound?.play()
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+            timer?.invalidate()
+            timer = NSTimer.scheduledTimerWithTimeInterval(2*distance/30.0, target: self, selector: #selector(loop), userInfo: nil, repeats: true)
+            
+        }
+    }
+    
+    func setupAudioPlayerWithFile(file:NSString, type:NSString) -> AVAudioPlayer?  {
+        let path = NSBundle.mainBundle().pathForResource(file as String, ofType: type as String)
+        let url = NSURL.fileURLWithPath(path!)
+        var audioPlayer:AVAudioPlayer?
+        
+        do {
+            try audioPlayer = AVAudioPlayer(contentsOfURL: url)
+        } catch {
+            print("Player not available")
+        }
+        
+        return audioPlayer
+    }
+    
     func setupData() {
         // 1. check if system can monitor regions
         if CLLocationManager.isMonitoringAvailableForClass(CLCircularRegion.self) {
@@ -47,17 +73,15 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         return circleRenderer
     }
     
-    // 1
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         if let annotation = annotation as? Friend {
             let identifier = "pin"
             var view: MKPinAnnotationView
             if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
-                as? MKPinAnnotationView { // 2
+                as? MKPinAnnotationView {
                 dequeuedView.annotation = annotation
                 view = dequeuedView
             } else {
-                // 3
                 view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 view.canShowCallout = true
                 view.calloutOffset = CGPoint(x: -5, y: 5)
@@ -76,34 +100,24 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         location.mapItem().openInMapsWithLaunchOptions(launchOptions)
     }
     
-//    // 1. user enter region
-//    func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
-//        alertsLabel.text = "Entered"
-//        let alertController = UIAlertController(title: "Disclaimer", message:
-//            "Hello, world!", preferredStyle: UIAlertControllerStyle.Alert)
-//        alertController.addAction(UIAlertAction(title: "Accept", style: UIAlertActionStyle.Default,handler: nil))
-//        
-//        self.presentViewController(alertController, animated: true, completion: nil)
-//        
-//        monitoredRegions[region.identifier] = NSDate()
-//    }
-//    
-//    // 2. user exit region
-//    func locationManager(manager: CLLocationManager, didExitRegion region: CLRegion) {
-//        alertsLabel.text = "Exited"
-//        let alertController = UIAlertController(title: "Disclaimer", message:
-//            "Hello, world!", preferredStyle: UIAlertControllerStyle.Alert)
-//        alertController.addAction(UIAlertAction(title: "Accept", style: UIAlertActionStyle.Default,handler: nil))
-//        
-//        self.presentViewController(alertController, animated: true, completion: nil)
-//        
-//        monitoredRegions.removeValueForKey(region.identifier)
-//    }
-    
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         distance = locations.last!.distanceFromLocation(friends[0].location)
         alertsLabel.text = String(distance)
         alertsLabel.backgroundColor = UIColor(red: 255/255.0, green: 0.0, blue: 0.0, alpha: CGFloat(1/distance))
+//        if !isInitialized {
+//            isInitialized = true
+//            
+//            let userLoction: CLLocation = locations[0]
+//            let latitude = userLoction.coordinate.latitude
+//            let longitude = userLoction.coordinate.longitude
+//            let latDelta: CLLocationDegrees = 0.001
+//            let lonDelta: CLLocationDegrees = 0.001
+//            let span:MKCoordinateSpan = MKCoordinateSpanMake(latDelta, lonDelta)
+//            let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
+//            let region: MKCoordinateRegion = MKCoordinateRegionMake(location, span)
+//            mapView.setRegion(region, animated: true)
+//            mapView.showsUserLocation = true
+//        }
     }
 
 }
