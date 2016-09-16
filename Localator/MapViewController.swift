@@ -76,7 +76,6 @@ class MapViewController: UIViewController {
     }
     
     func loop() {
-        print("here")
         if self.distance < 30 {
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
             timer?.invalidate()
