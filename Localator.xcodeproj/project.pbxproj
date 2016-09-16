@@ -8,13 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		67F98EDC1D8B6D330042EFEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F98EDB1D8B6D330042EFEF /* AppDelegate.swift */; };
-		67F98EDE1D8B6D330042EFEF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F98EDD1D8B6D330042EFEF /* ViewController.swift */; };
+		67F98EDE1D8B6D330042EFEF /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F98EDD1D8B6D330042EFEF /* FirstViewController.swift */; };
 		67F98EE11D8B6D330042EFEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67F98EDF1D8B6D330042EFEF /* Main.storyboard */; };
 		67F98EE41D8B6D330042EFEF /* Localator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 67F98EE21D8B6D330042EFEF /* Localator.xcdatamodeld */; };
 		67F98EE61D8B6D330042EFEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67F98EE51D8B6D330042EFEF /* Assets.xcassets */; };
 		67F98EE91D8B6D330042EFEF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67F98EE71D8B6D330042EFEF /* LaunchScreen.storyboard */; };
 		67F98EF41D8B6D330042EFEF /* LocalatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F98EF31D8B6D330042EFEF /* LocalatorTests.swift */; };
 		67F98EFF1D8B6D330042EFEF /* LocalatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F98EFE1D8B6D330042EFEF /* LocalatorUITests.swift */; };
+		67F98F0D1D8B71A60042EFEF /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F98F0C1D8B71A60042EFEF /* FriendsViewController.swift */; };
+		67F98F0F1D8B768A0042EFEF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F98F0E1D8B768A0042EFEF /* MapViewController.swift */; };
+		67F98F111D8B83120042EFEF /* FriendHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F98F101D8B83120042EFEF /* FriendHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +40,7 @@
 /* Begin PBXFileReference section */
 		67F98ED81D8B6D330042EFEF /* Localator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Localator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67F98EDB1D8B6D330042EFEF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		67F98EDD1D8B6D330042EFEF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		67F98EDD1D8B6D330042EFEF /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		67F98EE01D8B6D330042EFEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		67F98EE31D8B6D330042EFEF /* Localator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Localator.xcdatamodel; sourceTree = "<group>"; };
 		67F98EE51D8B6D330042EFEF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +52,9 @@
 		67F98EFA1D8B6D330042EFEF /* LocalatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocalatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		67F98EFE1D8B6D330042EFEF /* LocalatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalatorUITests.swift; sourceTree = "<group>"; };
 		67F98F001D8B6D330042EFEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		67F98F0C1D8B71A60042EFEF /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		67F98F0E1D8B768A0042EFEF /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		67F98F101D8B83120042EFEF /* FriendHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,8 +106,11 @@
 			isa = PBXGroup;
 			children = (
 				67F98EDB1D8B6D330042EFEF /* AppDelegate.swift */,
-				67F98EDD1D8B6D330042EFEF /* ViewController.swift */,
+				67F98EDD1D8B6D330042EFEF /* FirstViewController.swift */,
 				67F98EDF1D8B6D330042EFEF /* Main.storyboard */,
+				67F98F101D8B83120042EFEF /* FriendHeaderView.swift */,
+				67F98F0E1D8B768A0042EFEF /* MapViewController.swift */,
+				67F98F0C1D8B71A60042EFEF /* FriendsViewController.swift */,
 				67F98EE51D8B6D330042EFEF /* Assets.xcassets */,
 				67F98EE71D8B6D330042EFEF /* LaunchScreen.storyboard */,
 				67F98EEA1D8B6D330042EFEF /* Info.plist */,
@@ -262,9 +271,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				67F98EDE1D8B6D330042EFEF /* ViewController.swift in Sources */,
+				67F98F0D1D8B71A60042EFEF /* FriendsViewController.swift in Sources */,
+				67F98EDE1D8B6D330042EFEF /* FirstViewController.swift in Sources */,
 				67F98EDC1D8B6D330042EFEF /* AppDelegate.swift in Sources */,
+				67F98F0F1D8B768A0042EFEF /* MapViewController.swift in Sources */,
 				67F98EE41D8B6D330042EFEF /* Localator.xcdatamodeld in Sources */,
+				67F98F111D8B83120042EFEF /* FriendHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
