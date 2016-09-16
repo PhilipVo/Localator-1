@@ -15,8 +15,18 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     func setupData() {
         // 1. check if system can monitor regions
         if CLLocationManager.isMonitoringAvailableForClass(CLCircularRegion.self) {
+            for annotation in self.mapView.annotations {
+                mapView.removeAnnotation(annotation)
+            }
             
-            for friend in friends {
+            for overlay in self.mapView.overlays {
+                mapView.removeOverlay(overlay)
+            }
+            
+            print(friends)
+            
+            for i in 1..<friends.count {
+                let friend = friends[i]
                 // 2. region data
                 let title = friend.title
                 let coordinate = friend.coordinate
@@ -27,6 +37,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 locationManager.startMonitoringForRegion(region)
                 
                 // 4. setup annotation
+//                mapView.removeAnnotation(friend)
                 mapView.addAnnotation(friend)
                 
                 // 5. setup circle
@@ -101,10 +112,12 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
 //    }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        distance = locations.last!.distanceFromLocation(friends[0].location)
-        mapDelegate?.mapViewControllerDelegate(self, coordinate: locations.last!.coordinate)
-        alertsLabel.text = String(distance)
-        alertsLabel.backgroundColor = UIColor(red: 255/255.0, green: 0.0, blue: 0.0, alpha: CGFloat(1/distance))
+        if friends.count > 0 {
+            distance = locations.last!.distanceFromLocation(friends[0].location)
+            mapDelegate?.mapViewControllerDelegate(self, coordinate: locations.last!.coordinate)
+            alertsLabel.text = String(distance)
+            alertsLabel.backgroundColor = UIColor(red: 255/255.0, green: 0.0, blue: 0.0, alpha: CGFloat(1/distance))
+        }
     }
 
 }

@@ -63,11 +63,11 @@ class MapViewController: UIViewController, FirstViewControllerDelegate {
         mapView.userTrackingMode = .Follow
         
         // Add friends to map:
-        let friend = Friend(title: "Philip Vo", locationName: "Coding Dojo's Parking Lot",
-                            coordinate: CLLocationCoordinate2D(latitude: 37.375449, longitude: -121.910541))
-        friends.append(friend)
+//        let friend = Friend(title: "Philip Vo", locationName: "Coding Dojo's Parking Lot",
+//                            coordinate: CLLocationCoordinate2D(latitude: 37.375449, longitude: -121.910541))
+//        friends.append(friend)
         
-        setupData()
+//        setupData()
         timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(loop), userInfo: nil, repeats: true)
 
     }
@@ -75,14 +75,22 @@ class MapViewController: UIViewController, FirstViewControllerDelegate {
     func firstViewControllerDelegate(controller: UIViewController, didFinishReceivingUpdate person: NSDictionary) {
         let friend = Friend(title: person["name"]! as! String, locationName: "NULL", coordinate: CLLocationCoordinate2D(latitude: person["latitude"] as! CLLocationDegrees, longitude: person["longitude"] as! CLLocationDegrees))
         
+        var foundFriend: Friend?
+        
         for i in 0..<friends.count {
             if friends[i].title == friend.title {
-                friends[i] = friend
-                return
+                foundFriend = friends[i]
+                break
             }
         }
         
-        friends.append(friend)
+        if let unwrappedFriend = foundFriend {
+            unwrappedFriend.location = CLLocation(latitude: person["latitude"] as! CLLocationDegrees, longitude: person["longitude"] as! CLLocationDegrees)
+        } else {
+            friends.append(Friend(title: person["name"]! as! String, locationName: "NULL", coordinate: CLLocationCoordinate2D(latitude: person["latitude"] as! CLLocationDegrees, longitude: person["longitude"] as! CLLocationDegrees)))
+        }
+        
+        setupData()
     }
     
     override func didReceiveMemoryWarning() {

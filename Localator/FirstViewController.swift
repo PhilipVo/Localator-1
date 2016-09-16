@@ -91,7 +91,7 @@ class FirstViewController: UIViewController, MapViewControllerDelegate {
         }
         
         socket.on("position") { res, ack in
-            print(res)
+            print("RECEIVED \(res)")
             
             if let data = res[0] as? NSDictionary {
                 let person = data["data"]!["person"] as! NSDictionary

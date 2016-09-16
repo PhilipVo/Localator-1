@@ -12,7 +12,7 @@ import Contacts
 class Friend: NSObject, MKAnnotation {
     let title: String?
     let locationName: String
-    let location: CLLocation
+    var location: CLLocation
     let coordinate: CLLocationCoordinate2D
     let color: String
     
