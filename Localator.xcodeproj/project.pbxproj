@@ -21,6 +21,9 @@
 		67F98F141D8BBF630042EFEF /* alarm-clock-ticking.wav in Resources */ = {isa = PBXBuildFile; fileRef = 67F98F131D8BBF630042EFEF /* alarm-clock-ticking.wav */; };
 		67F98F171D8C66220042EFEF /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F98F161D8C66220042EFEF /* VCMapView.swift */; };
 		67F98F191D8C66360042EFEF /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F98F181D8C66360042EFEF /* Friend.swift */; };
+		67F98F1B1D8C86430042EFEF /* ping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 67F98F1A1D8C86430042EFEF /* ping.mp3 */; };
+		67F98F1D1D8C88970042EFEF /* water-drop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 67F98F1C1D8C88970042EFEF /* water-drop.mp3 */; };
+		67F98F1F1D8C88A60042EFEF /* beep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 67F98F1E1D8C88A60042EFEF /* beep.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +64,9 @@
 		67F98F131D8BBF630042EFEF /* alarm-clock-ticking.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "alarm-clock-ticking.wav"; path = "../alarm-clock-ticking.wav"; sourceTree = "<group>"; };
 		67F98F161D8C66220042EFEF /* VCMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMapView.swift; sourceTree = "<group>"; };
 		67F98F181D8C66360042EFEF /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		67F98F1A1D8C86430042EFEF /* ping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ping.mp3; sourceTree = "<group>"; };
+		67F98F1C1D8C88970042EFEF /* water-drop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "water-drop.mp3"; sourceTree = "<group>"; };
+		67F98F1E1D8C88A60042EFEF /* beep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,7 +155,10 @@
 		67F98F151D8BBF940042EFEF /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				67F98F1A1D8C86430042EFEF /* ping.mp3 */,
 				67F98F131D8BBF630042EFEF /* alarm-clock-ticking.wav */,
+				67F98F1C1D8C88970042EFEF /* water-drop.mp3 */,
+				67F98F1E1D8C88A60042EFEF /* beep.wav */,
 			);
 			name = Sounds;
 			sourceTree = "<group>";
@@ -262,7 +271,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				67F98EE91D8B6D330042EFEF /* LaunchScreen.storyboard in Resources */,
+				67F98F1F1D8C88A60042EFEF /* beep.wav in Resources */,
+				67F98F1D1D8C88970042EFEF /* water-drop.mp3 in Resources */,
 				67F98EE61D8B6D330042EFEF /* Assets.xcassets in Resources */,
+				67F98F1B1D8C86430042EFEF /* ping.mp3 in Resources */,
 				67F98F141D8BBF630042EFEF /* alarm-clock-ticking.wav in Resources */,
 				67F98EE11D8B6D330042EFEF /* Main.storyboard in Resources */,
 			);

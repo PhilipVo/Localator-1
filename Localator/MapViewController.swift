@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import AVFoundation
 import AudioToolbox
+import MediaPlayer
 
 class MapViewController: UIViewController {
     
@@ -22,6 +23,11 @@ class MapViewController: UIViewController {
     var friends: [Friend] = []
     var monitoredRegions: Dictionary<String, NSDate> = [:]
     var distance = 100.0
+    var isInitialized = false
+    
+    var audioPlayer = AVAudioPlayer()
+    var alarmSound : AVAudioPlayer?
+    var isPlaying = false
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -65,24 +71,20 @@ class MapViewController: UIViewController {
                             coordinate: CLLocationCoordinate2D(latitude: 37.375449, longitude: -121.910541))
         friends.append(friend)
         
+        // Setup sound:
+        if let alarmSound = self.setupAudioPlayerWithFile("beep", type:"wav") {
+            self.alarmSound = alarmSound
+        }
+        
+        
         setupData()
-        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(loop), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(loop), userInfo: nil, repeats: true)
 
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func loop() {
-        print("here")
-        if self.distance < 30 {
-            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-            timer?.invalidate()
-            timer = NSTimer.scheduledTimerWithTimeInterval(distance/30.0, target: self, selector: #selector(loop), userInfo: nil, repeats: true)
-            
-        }
     }
 }
 
