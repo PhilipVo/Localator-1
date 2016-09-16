@@ -46,6 +46,8 @@
 		7E97304A1D8C8CC500DA4E53 /* SocketTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9730321D8C8CC500DA4E53 /* SocketTypes.swift */; };
 		7E97304B1D8C8CC500DA4E53 /* SSLSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9730331D8C8CC500DA4E53 /* SSLSecurity.swift */; };
 		7E97304C1D8C8CC500DA4E53 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9730341D8C8CC500DA4E53 /* WebSocket.swift */; };
+		7E9730501D8C9DB400DA4E53 /* FirstViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E97304F1D8C9DB400DA4E53 /* FirstViewControllerDelegate.swift */; };
+		7E9730521D8C9F5900DA4E53 /* MapViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9730511D8C9F5900DA4E53 /* MapViewControllerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +113,8 @@
 		7E9730321D8C8CC500DA4E53 /* SocketTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketTypes.swift; sourceTree = "<group>"; };
 		7E9730331D8C8CC500DA4E53 /* SSLSecurity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSLSecurity.swift; sourceTree = "<group>"; };
 		7E9730341D8C8CC500DA4E53 /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
+		7E97304F1D8C9DB400DA4E53 /* FirstViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewControllerDelegate.swift; sourceTree = "<group>"; };
+		7E9730511D8C9F5900DA4E53 /* MapViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewControllerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +180,8 @@
 				67F98EEA1D8B6D330042EFEF /* Info.plist */,
 				67F98EE21D8B6D330042EFEF /* Localator.xcdatamodeld */,
 				7E97301A1D8C8BCE00DA4E53 /* TabBarController.swift */,
+				7E97304F1D8C9DB400DA4E53 /* FirstViewControllerDelegate.swift */,
+				7E9730511D8C9F5900DA4E53 /* MapViewControllerDelegate.swift */,
 			);
 			path = Localator;
 			sourceTree = "<group>";
@@ -392,10 +398,12 @@
 				7E9730461D8C8CC500DA4E53 /* SocketLogger.swift in Sources */,
 				7E9730361D8C8CC500DA4E53 /* SocketAckManager.swift in Sources */,
 				7E9730441D8C8CC500DA4E53 /* SocketIOClientSpec.swift in Sources */,
+				7E9730521D8C9F5900DA4E53 /* MapViewControllerDelegate.swift in Sources */,
 				7E97304A1D8C8CC500DA4E53 /* SocketTypes.swift in Sources */,
 				7E97303F1D8C8CC500DA4E53 /* SocketEventHandler.swift in Sources */,
 				7E97304B1D8C8CC500DA4E53 /* SSLSecurity.swift in Sources */,
 				67F98F171D8C66220042EFEF /* VCMapView.swift in Sources */,
+				7E9730501D8C9DB400DA4E53 /* FirstViewControllerDelegate.swift in Sources */,
 				7E9730401D8C8CC500DA4E53 /* SocketExtensions.swift in Sources */,
 				7E97304C1D8C8CC500DA4E53 /* WebSocket.swift in Sources */,
 				7E9730391D8C8CC500DA4E53 /* SocketEngine.swift in Sources */,

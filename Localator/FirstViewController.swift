@@ -1,9 +1,10 @@
 import UIKit
+import CoreLocation
 import AVFoundation
 import AudioToolbox
 import MediaPlayer
 
-class FirstViewController: UIViewController {
+class FirstViewController: UIViewController, MapViewControllerDelegate {
     
     let socket = SocketIOClient(socketURL: NSURL(string: "http://samuels-macbook-air-2.local:5000")!, config: [.ForcePolling(true), .ForceNew(true)])
 
@@ -74,7 +75,7 @@ class FirstViewController: UIViewController {
             print("Disconnected :(")
         }
         
-        self.socket.on("response") { res, ack in
+        socket.on("response") { res, ack in
             if let error = res[0]["error"] {
                 if (res[0].objectForKey("error") != nil) {
                     self.statusLabel.hidden = false
@@ -82,11 +83,19 @@ class FirstViewController: UIViewController {
                     self.statusLabel.text = error as? String
                 } else {
                     if let data = res[0] as? NSDictionary {
-                        print(data)
                         self.code = String(data["data"]!["code"]! as! Int)
                         self.performSegueWithIdentifier("roomSegue", sender: self)
                     }
                 }
+            }
+        }
+        
+        socket.on("position") { res, ack in
+            print(res)
+            
+            if let data = res[0] as? NSDictionary {
+                let person = data["data"]!["person"] as! NSDictionary
+                self.firstDelegate?.firstViewControllerDelegate(self, didFinishReceivingUpdate: person)
             }
         }
         
@@ -95,6 +104,10 @@ class FirstViewController: UIViewController {
             self.statusLabel.textColor = UIColor.redColor()
             self.statusLabel.text = "Connection failed :("
         })
+    }
+    
+    func mapViewControllerDelegate(controller: UIViewController, coordinate: CLLocationCoordinate2D) {
+        socket.emit("position", ["latitude": coordinate.latitude, "longitude": coordinate.longitude])
     }
     
     func validateCon() {
@@ -107,10 +120,14 @@ class FirstViewController: UIViewController {
     
     var code: String?
     
+    var firstDelegate: FirstViewControllerDelegate?
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "roomSegue" {
             let navController = segue.destinationViewController as! UINavigationController
             let controller = navController.topViewController as! TabBarController
+            (controller.viewControllers![0] as! MapViewController).mapDelegate = self
+            firstDelegate = (controller.viewControllers![0] as! MapViewController)
             controller.code = code!
         }
     }

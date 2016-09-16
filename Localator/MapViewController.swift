@@ -11,13 +11,15 @@ import MapKit
 import AVFoundation
 import AudioToolbox
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, FirstViewControllerDelegate {
     
     @IBOutlet weak var alertsLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     
     let locationManager = CLLocationManager()
     let regionRadius = 30.0
+    
+    var mapDelegate: MapViewControllerDelegate?
     
     var friends: [Friend] = []
     var monitoredRegions: Dictionary<String, NSDate> = [:]
@@ -68,6 +70,19 @@ class MapViewController: UIViewController {
         setupData()
         timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(loop), userInfo: nil, repeats: true)
 
+    }
+    
+    func firstViewControllerDelegate(controller: UIViewController, didFinishReceivingUpdate person: NSDictionary) {
+        let friend = Friend(title: person["name"]! as! String, locationName: "NULL", coordinate: CLLocationCoordinate2D(latitude: person["latitude"] as! CLLocationDegrees, longitude: person["longitude"] as! CLLocationDegrees))
+        
+        for i in 0..<friends.count {
+            if friends[i].title == friend.title {
+                friends[i] = friend
+                return
+            }
+        }
+        
+        friends.append(friend)
     }
     
     override func didReceiveMemoryWarning() {
