@@ -13,14 +13,25 @@ import AudioToolbox
 extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     
     func loop() {
-        print("here")
         if self.distance < 30 {
+            UIView.animateWithDuration(distance/60.0, delay: 0.0, options: UIViewAnimationOptions.ShowHideTransitionViews, animations: {
+                
+                if self.alertsLabel.alpha == 0.0 {
+                    self.alertsLabel.alpha = 1.0
+                }
+                else {
+                    self.alertsLabel.alpha = 0.3
+                }
+                }, completion: nil)
             alarmSound?.stop()
             alarmSound?.play()
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
             timer?.invalidate()
             timer = NSTimer.scheduledTimerWithTimeInterval(2*distance/30.0, target: self, selector: #selector(loop), userInfo: nil, repeats: true)
-            
+        }
+        else {
+            self.alertsLabel.alpha = 1.0
+            self.alertsLabel.backgroundColor = UIColor.blackColor()
         }
     }
     
@@ -102,22 +113,29 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         distance = locations.last!.distanceFromLocation(friends[0].location)
-        alertsLabel.text = String(distance)
-        alertsLabel.backgroundColor = UIColor(red: 255/255.0, green: 0.0, blue: 0.0, alpha: CGFloat(1/distance))
-//        if !isInitialized {
-//            isInitialized = true
-//            
-//            let userLoction: CLLocation = locations[0]
-//            let latitude = userLoction.coordinate.latitude
-//            let longitude = userLoction.coordinate.longitude
-//            let latDelta: CLLocationDegrees = 0.001
-//            let lonDelta: CLLocationDegrees = 0.001
-//            let span:MKCoordinateSpan = MKCoordinateSpanMake(latDelta, lonDelta)
-//            let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
-//            let region: MKCoordinateRegion = MKCoordinateRegionMake(location, span)
-//            mapView.setRegion(region, animated: true)
-//            mapView.showsUserLocation = true
-//        }
+        alertsLabel.text = "Distance: " + String(Int(distance)) + " (meters)"
+        if distance < 30 {
+            self.alertsLabel.backgroundColor = UIColor.redColor()
+        }
+        else {
+            self.alertsLabel.backgroundColor = UIColor.blackColor()
+            
+        }
+        //        alertsLabel.backgroundColor = UIColor(red: 255/255.0, green: 0.0, blue: 0.0, alpha: CGFloat(1/distance))
+        //        if !isInitialized {
+        //            isInitialized = true
+        //
+        //            let userLoction: CLLocation = locations[0]
+        //            let latitude = userLoction.coordinate.latitude
+        //            let longitude = userLoction.coordinate.longitude
+        //            let latDelta: CLLocationDegrees = 0.001
+        //            let lonDelta: CLLocationDegrees = 0.001
+        //            let span:MKCoordinateSpan = MKCoordinateSpanMake(latDelta, lonDelta)
+        //            let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
+        //            let region: MKCoordinateRegion = MKCoordinateRegionMake(location, span)
+        //            mapView.setRegion(region, animated: true)
+        //            mapView.showsUserLocation = true
+        //        }
     }
-
+    
 }

@@ -10,7 +10,7 @@ import UIKit
 
 class FriendsViewController: UICollectionViewController {
     
-    var friends = [1]
+    var friends = [1,2,3,4]
     
     @IBAction func onCancelBarButtonPressed(sender: UIBarButtonItem) {
         dismissViewControllerAnimated(true, completion: nil)
@@ -55,13 +55,12 @@ class FriendsViewController: UICollectionViewController {
     
     // MARK: Delegate Flow Layout
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        //        let photo = photoForIndexPath(indexPath)
         return CGSize(width: 100, height: 100)
     }
     
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-//        return sectionInsets
-//    }
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 10,left: 10,bottom: 10,right: 10)
+    }
 
     
 }
