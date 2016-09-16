@@ -18,6 +18,9 @@
 		67F98F0D1D8B71A60042EFEF /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F98F0C1D8B71A60042EFEF /* FriendsViewController.swift */; };
 		67F98F0F1D8B768A0042EFEF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F98F0E1D8B768A0042EFEF /* MapViewController.swift */; };
 		67F98F111D8B83120042EFEF /* FriendHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F98F101D8B83120042EFEF /* FriendHeaderView.swift */; };
+		67F98F141D8BBF630042EFEF /* alarm-clock-ticking.wav in Resources */ = {isa = PBXBuildFile; fileRef = 67F98F131D8BBF630042EFEF /* alarm-clock-ticking.wav */; };
+		67F98F171D8C66220042EFEF /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F98F161D8C66220042EFEF /* VCMapView.swift */; };
+		67F98F191D8C66360042EFEF /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F98F181D8C66360042EFEF /* Friend.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,9 @@
 		67F98F0C1D8B71A60042EFEF /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		67F98F0E1D8B768A0042EFEF /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		67F98F101D8B83120042EFEF /* FriendHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendHeaderView.swift; sourceTree = "<group>"; };
+		67F98F131D8BBF630042EFEF /* alarm-clock-ticking.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "alarm-clock-ticking.wav"; path = "../alarm-clock-ticking.wav"; sourceTree = "<group>"; };
+		67F98F161D8C66220042EFEF /* VCMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMapView.swift; sourceTree = "<group>"; };
+		67F98F181D8C66360042EFEF /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,11 +111,14 @@
 		67F98EDA1D8B6D330042EFEF /* Localator */ = {
 			isa = PBXGroup;
 			children = (
+				67F98F151D8BBF940042EFEF /* Sounds */,
 				67F98EDB1D8B6D330042EFEF /* AppDelegate.swift */,
 				67F98EDD1D8B6D330042EFEF /* FirstViewController.swift */,
 				67F98EDF1D8B6D330042EFEF /* Main.storyboard */,
 				67F98F101D8B83120042EFEF /* FriendHeaderView.swift */,
 				67F98F0E1D8B768A0042EFEF /* MapViewController.swift */,
+				67F98F161D8C66220042EFEF /* VCMapView.swift */,
+				67F98F181D8C66360042EFEF /* Friend.swift */,
 				67F98F0C1D8B71A60042EFEF /* FriendsViewController.swift */,
 				67F98EE51D8B6D330042EFEF /* Assets.xcassets */,
 				67F98EE71D8B6D330042EFEF /* LaunchScreen.storyboard */,
@@ -135,6 +144,14 @@
 				67F98F001D8B6D330042EFEF /* Info.plist */,
 			);
 			path = LocalatorUITests;
+			sourceTree = "<group>";
+		};
+		67F98F151D8BBF940042EFEF /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				67F98F131D8BBF630042EFEF /* alarm-clock-ticking.wav */,
+			);
+			name = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,6 +263,7 @@
 			files = (
 				67F98EE91D8B6D330042EFEF /* LaunchScreen.storyboard in Resources */,
 				67F98EE61D8B6D330042EFEF /* Assets.xcassets in Resources */,
+				67F98F141D8BBF630042EFEF /* alarm-clock-ticking.wav in Resources */,
 				67F98EE11D8B6D330042EFEF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,7 +294,9 @@
 				67F98EDC1D8B6D330042EFEF /* AppDelegate.swift in Sources */,
 				67F98F0F1D8B768A0042EFEF /* MapViewController.swift in Sources */,
 				67F98EE41D8B6D330042EFEF /* Localator.xcdatamodeld in Sources */,
+				67F98F171D8C66220042EFEF /* VCMapView.swift in Sources */,
 				67F98F111D8B83120042EFEF /* FriendHeaderView.swift in Sources */,
+				67F98F191D8C66360042EFEF /* Friend.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,6 +523,7 @@
 				67F98F051D8B6D330042EFEF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		67F98F061D8B6D330042EFEF /* Build configuration list for PBXNativeTarget "LocalatorTests" */ = {
 			isa = XCConfigurationList;
@@ -511,6 +532,7 @@
 				67F98F081D8B6D330042EFEF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		67F98F091D8B6D330042EFEF /* Build configuration list for PBXNativeTarget "LocalatorUITests" */ = {
 			isa = XCConfigurationList;
@@ -519,6 +541,7 @@
 				67F98F0B1D8B6D330042EFEF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
