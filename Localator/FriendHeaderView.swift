@@ -9,6 +9,4 @@ import UIKit
 
 class FriendHeaderView: UICollectionReusableView {
     @IBOutlet weak var label: UILabel!
-    
-   
 }

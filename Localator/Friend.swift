@@ -18,6 +18,7 @@ class Friend: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
     var color: UIColor
     var overlay: MKCircle?
+    var imageView: UIImageView?
     
     var subtitle: String? {
         return locationName

@@ -11,6 +11,8 @@ import AVFoundation
 
 class CameraViewController: UIViewController {
     
+    var delegate: CameraViewControllerDelegate?
+    
     var captureSession = AVCaptureSession()
     var sessionOutput = AVCaptureStillImageOutput()
     var previewLayer = AVCaptureVideoPreviewLayer()
@@ -54,9 +56,10 @@ class CameraViewController: UIViewController {
         if let videoConnection = sessionOutput.connectionWithMediaType(AVMediaTypeVideo){
             sessionOutput.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: {
                 buffer, error in
-//                let image = UIImage(data: AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer)!)!
-//                let data = UIImagePNGRepresentation(image)
-//                let base64 = data?.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
+                let image = UIImage(data: AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer)!)!
+                let data = UIImagePNGRepresentation(image)
+                let base64 = data?.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
+                self.delegate?.cameraViewControllerDelegate(self, didTakePhoto: base64!)
 //                let decodedData = NSData(base64EncodedString: base64!, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
 //                let backToImage = UIImage(data: decodedData)!
             })

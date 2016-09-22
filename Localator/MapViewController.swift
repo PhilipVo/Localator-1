@@ -104,5 +104,18 @@ class MapViewController: UIViewController, FirstViewControllerDelegate {
             }
         })
     }
+    
+    func firstViewControllerDelegate(controller: UIViewController, imageChanged person: NSDictionary) {
+        dispatch_async(dispatch_get_main_queue(), {
+            for friend in self.friends {
+                if friend.socketId == person["id"] as? String {
+                    let decodedData = NSData(base64EncodedString: person["image"] as! String, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
+                    let backToImage = UIImage(data: decodedData)!
+                    friend.imageView = UIImageView(image: backToImage)
+                    break
+                }
+            }
+        })
+    }
 }
 

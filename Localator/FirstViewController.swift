@@ -12,7 +12,7 @@ import AudioToolbox
 import MediaPlayer
 import CoreLocation
 
-class FirstViewController: UIViewController, MapViewControllerDelegate {
+class FirstViewController: UIViewController, MapViewControllerDelegate, CameraViewControllerDelegate {
     let socket = SocketIOClient(socketURL: NSURL(string: "http://samuels-macbook-air-2.local:5000")!, config: [.ForcePolling(true), .ForceNew(true)])
     
     var window: UIWindow?
@@ -21,9 +21,8 @@ class FirstViewController: UIViewController, MapViewControllerDelegate {
     var delegate: FirstViewControllerDelegate?
     
     @IBOutlet weak var nameField: UITextField!
-    
+
     @IBAction func onCreateButtonPressed(sender: UIButton) {
-//        performSegueWithIdentifier("mainSegue", sender: sender)
         socket.emit("room_created", ["name": nameField.text!])
     }
     
@@ -114,6 +113,15 @@ class FirstViewController: UIViewController, MapViewControllerDelegate {
             }
         }
         
+        socket.on("image_change") { res, ack in
+            print("Received image change")
+            
+            if let data = res[0] as? NSDictionary {
+                let person = data["data"]!["person"] as! NSDictionary
+                self.delegate?.firstViewControllerDelegate(self, imageChanged: person)
+            }
+        }
+        
         socket.connect(timeoutAfter: 5, withTimeoutHandler: {
             print("Connection failed :(")
         })
@@ -138,6 +146,9 @@ class FirstViewController: UIViewController, MapViewControllerDelegate {
                     delegate?.firstViewControllerDelegate(self, friendJoined: friend)
                 }
             }
+            
+            let cameraViewController = controller.viewControllers![2] as! CameraViewController
+            cameraViewController.delegate = self
         }
     }
     
@@ -180,6 +191,10 @@ class FirstViewController: UIViewController, MapViewControllerDelegate {
     func mapViewControllerDelegate(controller: UIViewController, didUpdateLocation coordinate: CLLocationCoordinate2D) {
         print("You moved, location sent to server.")
         socket.emit("position", ["latitude": coordinate.latitude, "longitude": coordinate.longitude])
+    }
+    
+    func cameraViewControllerDelegate(controller: UIViewController, didTakePhoto base64: String) {
+        socket.emit("image_change", ["base64": base64])
     }
 }
 
