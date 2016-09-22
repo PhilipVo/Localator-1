@@ -17,6 +17,7 @@ class FirstViewController: UIViewController, CancelButtonDelegate {
     let socket = SocketIOClient(socketURL: NSURL(string: "http://samuels-macbook-air-2.local:5000")!, config: [.ForcePolling(true), .ForceNew(true)])
     
     var code: String?
+    var friends: [NSDictionary]?
     var delegate: FirstViewControllerDelegate?
     
     @IBOutlet weak var nameField: UITextField!
@@ -68,18 +69,17 @@ class FirstViewController: UIViewController, CancelButtonDelegate {
                 if (res[0].objectForKey("error") != nil) {
                     print(error)
                 } else {
-                    if let data = res[0] as? NSDictionary {
-                        self.code = String(data["data"]!["code"]! as! Int)
+//                    print(res)
+                    if let data = res[0]["data"] as? NSDictionary {
+                        self.code = String(data["code"]! as! Int)
+                        
+                        print("debug1")
                         
                         if let people = data["people"] {
-                            for i in people as! NSArray {
-                                let person = people[i] as! NSDictionary
-                                let friend = Friend(socketId: person["id"] as! String, title: person["name"] as! String, locationName: "No idea", coordinate: CLLocationCoordinate2D(latitude: 37.375449, longitude: -121.910541))
-                                self.delegate?.firstViewControllerDelegate(self, friendJoined: friend)
-                                
-                            }
+                            self.friends = people as? [NSDictionary]
                         }
                         
+                        print("debug2")
                         self.performSegueWithIdentifier("mainSegue", sender: self)
                     }
                 }
@@ -120,6 +120,15 @@ class FirstViewController: UIViewController, CancelButtonDelegate {
             let controller = navController.topViewController as! TabBarController
             controller.code = code!
             delegate = controller.viewControllers![0] as! MapViewController
+            
+            if let unwrappedFriends = friends {
+                print("debug9")
+                
+                for person in unwrappedFriends {
+                    let friend = Friend(socketId: person["id"] as! String, title: person["name"] as! String, locationName: "No idea", coordinate: CLLocationCoordinate2D(latitude: 37.375449, longitude: -121.910541))
+                    delegate?.firstViewControllerDelegate(self, friendJoined: friend)
+                }
+            }
         }
         if segue.identifier == "cameraSegue" {
             let navController = segue.destinationViewController as! UINavigationController

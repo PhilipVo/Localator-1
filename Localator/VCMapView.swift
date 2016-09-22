@@ -59,22 +59,28 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         // 1. check if system can monitor regions
         if CLLocationManager.isMonitoringAvailableForClass(CLCircularRegion.self) {
             for i in 0..<friends.count {
-                // 2. region data
                 let friend = friends[i]
                 let title = friend.title
                 let coordinate = friend.coordinate
                 
-                // 3. setup region
                 let region = CLCircularRegion(center: CLLocationCoordinate2D(latitude: coordinate.latitude,
                     longitude: coordinate.longitude), radius: regionRadius, identifier: title!)
                 locationManager.startMonitoringForRegion(region)
                 
                 // 4. setup annotation
                 let clone = friend.clone()
+                print(clone)
                 mapView.addAnnotation(clone)
                 mapView.removeAnnotation(friend)
+//                for anontation in mapView.annotations {
+//                    if anontation.isEqual(friend) {
+//                        mapView.removeAnnotation(friend)
+//                        break
+//                    }
+//                }
+                
                 friends[i] = clone
-                mapView.addAnnotation(clone)
+                mapView.addAnnotation(friend)
                 
                 // 5. setup circle
                 let circle = MKCircle(centerCoordinate: coordinate, radius: regionRadius)
