@@ -13,13 +13,6 @@ import AudioToolbox
 extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     
     func loop() {
-//        testMen.coordinate = CLLocationCoordinate2D(latitude: testMen.coordinate.latitude + 0.00001, longitude: testMen.coordinate.longitude + 0.00001)
-////        print("Coordinate updated to \(testMen.coordinate)")
-//        let clone = testMen.clone()
-//        mapView.addAnnotation(clone)
-//        mapView.removeAnnotation(testMen)
-//        testMen = clone
-        
         if self.distance < 30 {
             UIView.animateWithDuration(distance/60.0, delay: 0.0, options: UIViewAnimationOptions.ShowHideTransitionViews, animations: {
                 
@@ -29,6 +22,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                     self.alertsLabel.alpha = 0.3
                 }
             }, completion: nil)
+            
             alarmSound?.stop()
             alarmSound?.play()
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
@@ -67,27 +61,17 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                     longitude: coordinate.longitude), radius: regionRadius, identifier: title!)
                 locationManager.startMonitoringForRegion(region)
                 
-                // 4. setup annotation
                 let clone = friend.clone()
                 print(clone)
                 mapView.addAnnotation(clone)
                 mapView.removeAnnotation(friend)
-//                for anontation in mapView.annotations {
-//                    if anontation.isEqual(friend) {
-//                        mapView.removeAnnotation(friend)
-//                        break
-//                    }
-//                }
-                
                 friends[i] = clone
-                mapView.addAnnotation(friend)
+                mapView.addAnnotation(clone)
                 
                 // 5. setup circle
-                let circle = MKCircle(centerCoordinate: coordinate, radius: regionRadius)
-                mapView.addOverlay(circle)
+//                let circle = MKCircle(centerCoordinate: coordinate, radius: regionRadius)
+//                mapView.addOverlay(circle)
             }
-            
-//            mapView.addAnnotation(testMen)
         }
         else {
             print("System can't track regions")
@@ -139,6 +123,8 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 
             }
         }
+        
+        firstDelegate?.mapViewControllerDelegate(self, didUpdateLocation: locations.last!.coordinate)
 //                alertsLabel.backgroundColor = UIColor(red: 255/255.0, green: 0.0, blue: 0.0, alpha: CGFloat(1/distance))
 //                if !isInitialized {
 //                    isInitialized = true

@@ -19,6 +19,8 @@ class MapViewController: UIViewController, FirstViewControllerDelegate {
     
     var delegate: MapViewControllerDelegate?
     
+    var firstDelegate: MapViewControllerDelegate?
+    
     let locationManager = CLLocationManager()
     let regionRadius = 30.0
     
@@ -80,11 +82,26 @@ class MapViewController: UIViewController, FirstViewControllerDelegate {
     }
     
     func firstViewControllerDelegate(controller: UIViewController, friendJoined friend: Friend) {
+        print("Received friendJoined")
         friends.append(friend)
         
         dispatch_async(dispatch_get_main_queue(), {
             self.setupData()
             self.delegate?.mapViewControllerDelegate(self, didUpdateFriends:  self.friends)
+        })
+    }
+    
+    func firstViewControllerDelegate(controller: UIViewController, positionUpdated person: NSDictionary) {
+        print("Received positionUpdated")
+        dispatch_async(dispatch_get_main_queue(), {
+            for friend in self.friends {
+                if friend.socketId == person["id"] as? String {
+                    print("Found, updating location of \(person["id"])")
+                    friend.coordinate = CLLocationCoordinate2D(latitude: person["latitude"] as! CLLocationDegrees, longitude: person["longitude"] as! CLLocationDegrees)
+                    self.setupData()
+                    break
+                }
+            }
         })
     }
 }

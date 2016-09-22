@@ -12,8 +12,7 @@ import AudioToolbox
 import MediaPlayer
 import CoreLocation
 
-class FirstViewController: UIViewController, CancelButtonDelegate {
-    
+class FirstViewController: UIViewController, CancelButtonDelegate, MapViewControllerDelegate {
     let socket = SocketIOClient(socketURL: NSURL(string: "http://samuels-macbook-air-2.local:5000")!, config: [.ForcePolling(true), .ForceNew(true)])
     
     var window: UIWindow?
@@ -68,7 +67,8 @@ class FirstViewController: UIViewController, CancelButtonDelegate {
         view.addGestureRecognizer(tap)
         
         socket.on("connect") { data, ack in
-            NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: #selector(self.validateCon), userInfo: nil, repeats: true)
+            print("CONNECTED TO THE SERVER")
+//            NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: #selector(self.validateCon), userInfo: nil, repeats: true)
         }
         
         socket.on("disconnect") { data, ack in
@@ -80,17 +80,13 @@ class FirstViewController: UIViewController, CancelButtonDelegate {
                 if (res[0].objectForKey("error") != nil) {
                     print(error)
                 } else {
-//                    print(res)
                     if let data = res[0]["data"] as? NSDictionary {
                         self.code = String(data["code"]! as! Int)
-                        
-                        print("debug1")
                         
                         if let people = data["people"] {
                             self.friends = people as? [NSDictionary]
                         }
                         
-                        print("debug2")
                         self.performSegueWithIdentifier("mainSegue", sender: self)
                     }
                 }
@@ -107,13 +103,15 @@ class FirstViewController: UIViewController, CancelButtonDelegate {
         }
         
         socket.on("position") { res, ack in
-            //            print("RECEIVED \(res)")
+            print("Received position data \(res)")
             
-//            if let data = res[0] as? NSDictionary {
-//                let person = data["data"]!["person"] as! NSDictionary
-//                self.firstDelegate?.firstViewControllerDelegate(self, didFinishReceivingUpdate: person)
-//                Handle position update on MAP
-//            }
+            if let data = res[0] as? NSDictionary {
+                let person = data["data"]!["person"] as! NSDictionary
+                
+                if (person["id"] as! String) != self.socket.engine?.sid {
+                    self.delegate?.firstViewControllerDelegate(self, positionUpdated: person)
+                }
+            }
         }
         
         socket.connect(timeoutAfter: 5, withTimeoutHandler: {
@@ -130,17 +128,18 @@ class FirstViewController: UIViewController, CancelButtonDelegate {
             let navController = segue.destinationViewController as! UINavigationController
             let controller = navController.topViewController as! TabBarController
             controller.code = code!
-            delegate = controller.viewControllers![0] as! MapViewController
+            let mapViewController = controller.viewControllers![0] as! MapViewController
+            delegate = mapViewController
+            mapViewController.firstDelegate = self
             
             if let unwrappedFriends = friends {
-                print("debug9")
-                
                 for person in unwrappedFriends {
                     let friend = Friend(socketId: person["id"] as! String, title: person["name"] as! String, locationName: "No idea", coordinate: CLLocationCoordinate2D(latitude: 37.375449, longitude: -121.910541))
                     delegate?.firstViewControllerDelegate(self, friendJoined: friend)
                 }
             }
         }
+        
         if segue.identifier == "cameraSegue" {
             let navController = segue.destinationViewController as! UINavigationController
             let controller = navController.topViewController as! CameraViewController
@@ -176,15 +175,17 @@ class FirstViewController: UIViewController, CancelButtonDelegate {
         
         return audioPlayer
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    func mapViewControllerDelegate(controller: UIViewController, didUpdateFriends friends: [Friend]) {}
     
-
-
+    func mapViewControllerDelegate(controller: UIViewController, didUpdateLocation coordinate: CLLocationCoordinate2D) {
+        print("You moved, location sent to server.")
+        socket.emit("position", ["latitude": coordinate.latitude, "longitude": coordinate.longitude])
+    }
 }
 
