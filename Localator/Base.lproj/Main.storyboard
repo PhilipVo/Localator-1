@@ -101,6 +101,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GdT-fF-5hj">
                                 <rect key="frame" x="116" y="430" width="89" height="30"/>
                                 <state key="normal" title="Take a Photo"/>
+                                <connections>
+                                    <action selector="TakePhoto:" destination="cGA-cS-tvx" eventType="touchUpInside" id="Zgo-ot-asC"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V6P-EG-ElS">
                                 <rect key="frame" x="0.0" y="64" width="320" height="356"/>
@@ -131,7 +134,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XB5-lr-dfu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1679" y="1317"/>
+            <point key="canvasLocation" x="1759" y="1317"/>
         </scene>
         <!--FriendsViewController-->
         <scene sceneID="Owg-kX-ig3">
@@ -257,7 +260,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ItY-yJ-sWL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4083" y="1138"/>
+            <point key="canvasLocation" x="3551" y="1078"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Aqn-Xv-4yr">

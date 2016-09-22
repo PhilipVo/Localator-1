@@ -16,8 +16,8 @@ class Friend: NSObject, MKAnnotation {
     let locationName: String
     let location: CLLocation
     var coordinate: CLLocationCoordinate2D
-    let color: String
-    var lastUpdate: NSDate?
+    var color: UIColor
+    var overlay: MKCircle?
     
     var subtitle: String? {
         return locationName
@@ -29,7 +29,7 @@ class Friend: NSObject, MKAnnotation {
         self.locationName = locationName
         self.location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         self.coordinate = coordinate
-        self.color = "Normal"
+        self.color = MapViewController.generateRandomColor()
         super.init()
     }
     
@@ -43,17 +43,12 @@ class Friend: NSObject, MKAnnotation {
     }
     
     func pinColor() -> UIColor  {
-        switch color {
-        case "Close":
-            return UIColor.orangeColor()
-        case "Far":
-            return UIColor.blueColor()
-        default:
-            return UIColor.redColor()
-        }
+        return color
     }
 
     func clone() -> Friend {
-        return Friend(socketId: socketId!, title: title!, locationName: locationName, coordinate: coordinate)
+        let clone = Friend(socketId: socketId!, title: title!, locationName: locationName, coordinate: coordinate)
+        clone.color = color
+        return clone
     }
 }
