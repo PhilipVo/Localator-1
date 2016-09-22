@@ -38,9 +38,9 @@ class FriendsViewController: UICollectionViewController, MapViewControllerDelega
         cell.nameLabel.text = friends[indexPath.row].title
         
         if let imageView = friends[indexPath.row].imageView {
-            cell.backgroundView = imageView
+            cell.imageView = imageView
         } else {
-            cell.backgroundColor = friends[indexPath.row].color
+            cell.imageView.backgroundColor = friends[indexPath.row].color
         }
         return cell
     }
