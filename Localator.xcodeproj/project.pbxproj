@@ -26,6 +26,7 @@
 		67F98F1D1D8C88970042EFEF /* water-drop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 67F98F1C1D8C88970042EFEF /* water-drop.mp3 */; };
 		67F98F1F1D8C88A60042EFEF /* beep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 67F98F1E1D8C88A60042EFEF /* beep.wav */; };
 		7EA2AACB1D94837E008C89B0 /* CameraViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA2AACA1D94837E008C89B0 /* CameraViewControllerDelegate.swift */; };
+		7EA2AACD1D948D4B008C89B0 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA2AACC1D948D4B008C89B0 /* ImageViewController.swift */; };
 		7ED14ECE1D9433A300E2D6D9 /* SocketAckEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED14EB61D9433A300E2D6D9 /* SocketAckEmitter.swift */; };
 		7ED14ECF1D9433A300E2D6D9 /* SocketAckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED14EB71D9433A300E2D6D9 /* SocketAckManager.swift */; };
 		7ED14ED01D9433A300E2D6D9 /* SocketAnyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED14EB81D9433A300E2D6D9 /* SocketAnyEvent.swift */; };
@@ -99,6 +100,7 @@
 		67F98F1C1D8C88970042EFEF /* water-drop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "water-drop.mp3"; sourceTree = "<group>"; };
 		67F98F1E1D8C88A60042EFEF /* beep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep.wav; sourceTree = "<group>"; };
 		7EA2AACA1D94837E008C89B0 /* CameraViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewControllerDelegate.swift; sourceTree = "<group>"; };
+		7EA2AACC1D948D4B008C89B0 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		7ED14EB61D9433A300E2D6D9 /* SocketAckEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAckEmitter.swift; sourceTree = "<group>"; };
 		7ED14EB71D9433A300E2D6D9 /* SocketAckManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAckManager.swift; sourceTree = "<group>"; };
 		7ED14EB81D9433A300E2D6D9 /* SocketAnyEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAnyEvent.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				7ED14EE81D94455B00E2D6D9 /* FriendCell.swift */,
 				7ED14EEA1D94490E00E2D6D9 /* FirstViewControllerDelegate.swift */,
 				7EA2AACA1D94837E008C89B0 /* CameraViewControllerDelegate.swift */,
+				7EA2AACC1D948D4B008C89B0 /* ImageViewController.swift */,
 			);
 			path = Localator;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				7EF2B7951D937A3B0013272B /* TabBarController.swift in Sources */,
 				67F98F0F1D8B768A0042EFEF /* MapViewController.swift in Sources */,
 				67F98EE41D8B6D330042EFEF /* Localator.xcdatamodeld in Sources */,
+				7EA2AACD1D948D4B008C89B0 /* ImageViewController.swift in Sources */,
 				7ED14EDF1D9433A300E2D6D9 /* SocketLogger.swift in Sources */,
 				7EA2AACB1D94837E008C89B0 /* CameraViewControllerDelegate.swift in Sources */,
 				7ED14ECF1D9433A300E2D6D9 /* SocketAckManager.swift in Sources */,

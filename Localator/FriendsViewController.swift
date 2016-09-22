@@ -42,6 +42,7 @@ class FriendsViewController: UICollectionViewController, MapViewControllerDelega
         } else {
             cell.backgroundColor = friends[indexPath.row].color
         }
+        
         return cell
     }
     
@@ -53,6 +54,28 @@ class FriendsViewController: UICollectionViewController, MapViewControllerDelega
             return headerView
         default:
             assert(false, "Unexpected element kind")
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "viewImage" {
+            dispatch_async(dispatch_get_main_queue(), {
+                let controller = segue.destinationViewController as! ImageViewController
+                
+                if let imageView = controller.imageView {
+                    imageView.image = (sender as? UIImageView)?.image!
+                    imageView.setNeedsDisplay()
+                    imageView.reloadInputViews()
+                }
+            })
+        }
+    }
+    
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = collectionView.cellForItemAtIndexPath(indexPath)
+        
+        if let backgroundView = cell?.backgroundView {
+            performSegueWithIdentifier("viewImage", sender: backgroundView)
         }
     }
     

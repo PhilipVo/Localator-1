@@ -199,10 +199,49 @@
                     <tabBarItem key="tabBarItem" title="All Friends" id="P6b-0x-QPR" userLabel="All Friends">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-20"/>
                     </tabBarItem>
+                    <navigationItem key="navigationItem" id="Yzg-ld-vaP"/>
+                    <connections>
+                        <segue destination="pQx-Hx-UCl" kind="show" identifier="viewImage" id="WM6-fY-dqo"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qy3-Ta-WVr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3551" y="378"/>
+        </scene>
+        <!--Image View Controller-->
+        <scene sceneID="ysh-z1-wTL">
+            <objects>
+                <viewController id="pQx-Hx-UCl" customClass="ImageViewController" customModule="Localator" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XLz-Ca-90r"/>
+                        <viewControllerLayoutGuide type="bottom" id="F1m-es-mpv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1F5-Ik-5Tj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V5g-W7-qbI">
+                                <rect key="frame" x="16" y="28" width="288" height="452"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="V5g-W7-qbI" secondAttribute="trailing" id="9uS-I2-hkH"/>
+                            <constraint firstItem="V5g-W7-qbI" firstAttribute="top" secondItem="XLz-Ca-90r" secondAttribute="bottom" constant="8" id="Slw-rt-VNj"/>
+                            <constraint firstItem="V5g-W7-qbI" firstAttribute="top" secondItem="XLz-Ca-90r" secondAttribute="bottom" constant="8" id="ZPH-U3-Lh0"/>
+                            <constraint firstItem="V5g-W7-qbI" firstAttribute="leading" secondItem="1F5-Ik-5Tj" secondAttribute="leadingMargin" id="c2p-DU-DUc"/>
+                            <constraint firstItem="V5g-W7-qbI" firstAttribute="centerX" secondItem="1F5-Ik-5Tj" secondAttribute="centerX" id="dfU-Hc-6ZG"/>
+                            <constraint firstItem="F1m-es-mpv" firstAttribute="top" secondItem="V5g-W7-qbI" secondAttribute="bottom" id="evc-TJ-n7I"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="imageView" destination="V5g-W7-qbI" id="ZTd-Uq-ikH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gOs-n6-MkD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4122" y="378"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="Clg-15-T8x">
