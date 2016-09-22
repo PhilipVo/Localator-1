@@ -123,13 +123,15 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        distance = locations.last!.distanceFromLocation(friends[0].location)
-        alertsLabel.text = "Distance: " + String(Int(distance)) + " (meters)"
-        if distance < 30 {
-            self.alertsLabel.backgroundColor = UIColor.redColor()
-        } else {
-            self.alertsLabel.backgroundColor = UIColor.blackColor()
-            
+        if let friend = friends.first {
+            distance = locations.last!.distanceFromLocation(friend.location)
+            alertsLabel.text = "Distance: " + String(Int(distance)) + " (meters)"
+            if distance < 30 {
+                self.alertsLabel.backgroundColor = UIColor.redColor()
+            } else {
+                self.alertsLabel.backgroundColor = UIColor.blackColor()
+                
+            }
         }
 //                alertsLabel.backgroundColor = UIColor(red: 255/255.0, green: 0.0, blue: 0.0, alpha: CGFloat(1/distance))
 //                if !isInitialized {
