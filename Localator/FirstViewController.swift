@@ -12,7 +12,7 @@ import AudioToolbox
 import MediaPlayer
 import CoreLocation
 
-class FirstViewController: UIViewController {
+class FirstViewController: UIViewController, CancelButtonDelegate {
     
     let socket = SocketIOClient(socketURL: NSURL(string: "http://samuels-macbook-air-2.local:5000")!, config: [.ForcePolling(true), .ForceNew(true)])
     
@@ -41,6 +41,11 @@ class FirstViewController: UIViewController {
         }))
         
         presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: delegation
+    func cancelButtonPressedFrom(controller: UIViewController) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -116,6 +121,11 @@ class FirstViewController: UIViewController {
             controller.code = code!
             delegate = controller.viewControllers![0] as! MapViewController
         }
+        if segue.identifier == "cameraSegue" {
+            let navController = segue.destinationViewController as! UINavigationController
+            let controller = navController.topViewController as! CameraViewController
+            controller.cancelButtonDelegate = self
+        }
     }
     
     func validateCon() {
@@ -126,70 +136,12 @@ class FirstViewController: UIViewController {
         view.endEditing(true)
     }
     
-    // MARK: flashlight
-    // on/off capability
-    var on: Bool = false
-    @IBAction func testButtonPressed(sender: UIButton) {
-        let avDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-        
-        // check if the device has torch
-        if avDevice.hasTorch {
-            // lock your device for configuration
-            do {
-                _ = try avDevice.lockForConfiguration()
-            } catch {
-                print("error")
-            }
-            
-            // check if your torchMode is on or off. If on turns it off otherwise turns it on
-            if on == true {
-                avDevice.torchMode = AVCaptureTorchMode.Off
-                on = false
-            } else {
-                // sets the torch intensity to 100%
-                do {
-                    _ = try avDevice.setTorchModeOnWithLevel(1.0)
-                    on = true
-                } catch {
-                    print("error")
-                }
-                //    avDevice.setTorchModeOnWithLevel(1.0, error: nil)
-            }
-            // unlock your device
-            avDevice.unlockForConfiguration()
-        }
-    }
-    
-    // MARK: vibration
-    
-    @IBAction func onVibrateButtonPressed(sender: UIButton) {
-        for _ in 1...5 {
-        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-        sleep(1)
-        }
-    }
     
     // MARK: audio
-    // TODO: force volume to highest level
     var audioPlayer = AVAudioPlayer()
     var isPlaying = false
     var alarmSound : AVAudioPlayer?
     
-    //    let volumeView = MPVolumeView()
-    //    if let view = volumeView.subviews.first as? UISlider{
-    //        view.value = 0.1 //---0 t0 1.0---
-    //    }
-    
-    @IBAction func onSoundButtonPressed(sender: UIButton) {
-        if isPlaying == true {
-            alarmSound?.stop()
-            isPlaying = false
-        } else {
-            alarmSound?.play()
-            isPlaying = true
-        }
-        
-    }
     
     func setupAudioPlayerWithFile(file:NSString, type:NSString) -> AVAudioPlayer?  {
         let path = NSBundle.mainBundle().pathForResource(file as String, ofType: type as String)
