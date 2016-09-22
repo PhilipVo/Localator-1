@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		190B49B31D93524B00731EFC /* RecordVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190B49B21D93524B00731EFC /* RecordVideoViewController.swift */; };
 		67F98EDC1D8B6D330042EFEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F98EDB1D8B6D330042EFEF /* AppDelegate.swift */; };
 		67F98EDE1D8B6D330042EFEF /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F98EDD1D8B6D330042EFEF /* FirstViewController.swift */; };
 		67F98EE11D8B6D330042EFEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67F98EDF1D8B6D330042EFEF /* Main.storyboard */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		190B49B21D93524B00731EFC /* RecordVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordVideoViewController.swift; sourceTree = "<group>"; };
 		67F98ED81D8B6D330042EFEF /* Localator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Localator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67F98EDB1D8B6D330042EFEF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67F98EDD1D8B6D330042EFEF /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				67F98EDD1D8B6D330042EFEF /* FirstViewController.swift */,
 				67F98EDF1D8B6D330042EFEF /* Main.storyboard */,
 				67F98F101D8B83120042EFEF /* FriendHeaderView.swift */,
+				190B49B21D93524B00731EFC /* RecordVideoViewController.swift */,
 				67F98F0E1D8B768A0042EFEF /* MapViewController.swift */,
 				67F98F161D8C66220042EFEF /* VCMapView.swift */,
 				67F98F181D8C66360042EFEF /* Friend.swift */,
@@ -231,7 +234,7 @@
 				TargetAttributes = {
 					67F98ED71D8B6D330042EFEF = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = BU873PKFN4;
+						DevelopmentTeam = 7S26JQ9KDD;
 					};
 					67F98EEE1D8B6D330042EFEF = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -302,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				67F98F0D1D8B71A60042EFEF /* FriendsViewController.swift in Sources */,
+				190B49B31D93524B00731EFC /* RecordVideoViewController.swift in Sources */,
 				67F98EDE1D8B6D330042EFEF /* FirstViewController.swift in Sources */,
 				67F98EDC1D8B6D330042EFEF /* AppDelegate.swift in Sources */,
 				67F98F0F1D8B768A0042EFEF /* MapViewController.swift in Sources */,
@@ -452,10 +456,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Localator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.Localator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ptbv.Localator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -463,10 +470,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Localator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.Localator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ptbv.Localator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
