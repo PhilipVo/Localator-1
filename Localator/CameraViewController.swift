@@ -19,11 +19,13 @@ class CameraViewController: UIViewController {
     @IBAction func cancelBarButtonPressed(sender: UIBarButtonItem) {
         cancelButtonDelegate?.cancelButtonPressedFrom(self)
     }
+    
     @IBOutlet var cameraView: UIView!
+    
     override func viewWillAppear(animated: Bool) {
         let devices = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo)
         for device in devices {
-            if device.position == AVCaptureDevicePosition.Back{
+            if device.position == AVCaptureDevicePosition.Back {
                 do{
                     let input = try AVCaptureDeviceInput(device: device as! AVCaptureDevice)
                     if captureSession.canAddInput(input){
@@ -50,13 +52,17 @@ class CameraViewController: UIViewController {
             }
         }
     }
+    
     @IBAction func TakePhoto(sender: AnyObject) {
         print("photo button pressed")
         if let videoConnection = sessionOutput.connectionWithMediaType(AVMediaTypeVideo){
             sessionOutput.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: {
                 buffer, error in
-                let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer)
-                UIImageWriteToSavedPhotosAlbum(UIImage(data: imageData)!, nil, nil, nil)
+//                let image = UIImage(data: AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer)!)!
+//                let data = UIImagePNGRepresentation(image)
+//                let base64 = data?.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
+//                let decodedData = NSData(base64EncodedString: base64!, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
+//                let backToImage = UIImage(data: decodedData)!
             })
         }
         

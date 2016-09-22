@@ -61,6 +61,10 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                     longitude: coordinate.longitude), radius: regionRadius, identifier: title!)
                 locationManager.startMonitoringForRegion(region)
                 
+                if let unwrappedOverlay = friend.overlay {
+                    mapView.removeOverlay(unwrappedOverlay)
+                }
+                
                 let clone = friend.clone()
                 print(clone)
                 mapView.addAnnotation(clone)
@@ -69,8 +73,9 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 mapView.addAnnotation(clone)
                 
                 // 5. setup circle
-//                let circle = MKCircle(centerCoordinate: coordinate, radius: regionRadius)
-//                mapView.addOverlay(circle)
+                let circle = MKCircle(centerCoordinate: coordinate, radius: regionRadius)
+                mapView.addOverlay(circle)
+                clone.overlay = circle;
             }
         }
         else {
@@ -78,7 +83,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         }
     }
     
-    // 6. draw circle
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
         let circleRenderer = MKCircleRenderer(overlay: overlay)
         circleRenderer.strokeColor = UIColor.redColor()
@@ -125,21 +129,13 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         }
         
         firstDelegate?.mapViewControllerDelegate(self, didUpdateLocation: locations.last!.coordinate)
-//                alertsLabel.backgroundColor = UIColor(red: 255/255.0, green: 0.0, blue: 0.0, alpha: CGFloat(1/distance))
-//                if !isInitialized {
-//                    isInitialized = true
-//        
-//                    let userLoction: CLLocation = locations[0]
-//                    let latitude = userLoction.coordinate.latitude
-//                    let longitude = userLoction.coordinate.longitude
-//                    let latDelta: CLLocationDegrees = 0.001
-//                    let lonDelta: CLLocationDegrees = 0.001
-//                    let span:MKCoordinateSpan = MKCoordinateSpanMake(latDelta, lonDelta)
-//                    let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
-//                    let region: MKCoordinateRegion = MKCoordinateRegionMake(location, span)
-//                    mapView.setRegion(region, animated: true)
-//                    mapView.showsUserLocation = true
-//                }
     }
     
+    static func generateRandomColor() -> UIColor {
+        let hue : CGFloat = CGFloat(arc4random() % 256) / 256 // use 256 to get full range from 0.0 to 1.0
+        let saturation : CGFloat = CGFloat(arc4random() % 128) / 256 + 0.5 // from 0.5 to 1.0 to stay away from white
+        let brightness : CGFloat = CGFloat(arc4random() % 128) / 256 + 0.5 // from 0.5 to 1.0 to stay away from black
+        
+        return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1)
+    }
 }
