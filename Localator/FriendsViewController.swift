@@ -36,6 +36,7 @@ class FriendsViewController: UICollectionViewController, MapViewControllerDelega
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("FriendCell", forIndexPath: indexPath) as! FriendCell
         cell.backgroundColor = UIColor.yellowColor()
         cell.nameLabel.text = friends[indexPath.row].title
+        cell.backgroundColor = friends[indexPath.row].color
         return cell
     }
     

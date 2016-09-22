@@ -14,12 +14,7 @@ class CameraViewController: UIViewController {
     var captureSession = AVCaptureSession()
     var sessionOutput = AVCaptureStillImageOutput()
     var previewLayer = AVCaptureVideoPreviewLayer()
-    weak var cancelButtonDelegate: CancelButtonDelegate?
-    
-    @IBAction func cancelBarButtonPressed(sender: UIBarButtonItem) {
-        cancelButtonDelegate?.cancelButtonPressedFrom(self)
-    }
-    
+
     @IBOutlet var cameraView: UIView!
     
     override func viewWillAppear(animated: Bool) {
@@ -55,6 +50,7 @@ class CameraViewController: UIViewController {
     
     @IBAction func TakePhoto(sender: AnyObject) {
         print("photo button pressed")
+        
         if let videoConnection = sessionOutput.connectionWithMediaType(AVMediaTypeVideo){
             sessionOutput.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: {
                 buffer, error in

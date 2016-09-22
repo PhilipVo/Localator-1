@@ -12,7 +12,7 @@ import AudioToolbox
 import MediaPlayer
 import CoreLocation
 
-class FirstViewController: UIViewController, CancelButtonDelegate, MapViewControllerDelegate {
+class FirstViewController: UIViewController, MapViewControllerDelegate {
     let socket = SocketIOClient(socketURL: NSURL(string: "http://samuels-macbook-air-2.local:5000")!, config: [.ForcePolling(true), .ForceNew(true)])
     
     var window: UIWindow?
@@ -138,12 +138,6 @@ class FirstViewController: UIViewController, CancelButtonDelegate, MapViewContro
                     delegate?.firstViewControllerDelegate(self, friendJoined: friend)
                 }
             }
-        }
-        
-        if segue.identifier == "cameraSegue" {
-            let navController = segue.destinationViewController as! UINavigationController
-            let controller = navController.topViewController as! CameraViewController
-            controller.cancelButtonDelegate = self
         }
     }
     

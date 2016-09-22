@@ -24,19 +24,19 @@
                                     <constraint firstAttribute="width" constant="200" id="dB1-se-gzM"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Version 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zn9-GW-Sab">
-                                <rect key="frame" x="265" y="329" width="72" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="v2.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zn9-GW-Sab">
+                                <rect key="frame" x="282" y="502" width="37" height="26"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="19"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="zn9-GW-Sab" secondAttribute="bottom" constant="72" id="ATb-uP-wxg"/>
                             <constraint firstItem="AlV-Ha-poY" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="PIr-SD-hr2"/>
-                            <constraint firstItem="zn9-GW-Sab" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="WbR-7G-u0P"/>
                             <constraint firstItem="AlV-Ha-poY" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="40" id="gze-w6-Wks"/>
-                            <constraint firstItem="zn9-GW-Sab" firstAttribute="top" secondItem="AlV-Ha-poY" secondAttribute="bottom" constant="69" id="nYy-EW-IXh"/>
+                            <constraint firstItem="zn9-GW-Sab" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="pfh-9H-7bI"/>
                         </constraints>
                     </view>
                 </viewController>
