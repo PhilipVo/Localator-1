@@ -1,4 +1,5 @@
 import UIKit
+import CoreLocation
 
 class FriendsViewController: UICollectionViewController, MapViewControllerDelegate {
     
@@ -61,4 +62,6 @@ class FriendsViewController: UICollectionViewController, MapViewControllerDelega
         self.friends = friends
         self.collectionView?.reloadData()
     }
+    
+    func mapViewControllerDelegate(controller: UIViewController, didUpdateLocation coordinate: CLLocationCoordinate2D) {}
 }

@@ -19,6 +19,8 @@ class MapViewController: UIViewController, FirstViewControllerDelegate {
     
     var delegate: MapViewControllerDelegate?
     
+    var firstDelegate: MapViewControllerDelegate?
+    
     let locationManager = CLLocationManager()
     let regionRadius = 30.0
     
@@ -86,6 +88,16 @@ class MapViewController: UIViewController, FirstViewControllerDelegate {
             self.setupData()
             self.delegate?.mapViewControllerDelegate(self, didUpdateFriends:  self.friends)
         })
+    }
+    
+    func firstViewControllerDelegate(controller: UIViewController, positionUpdated person: NSDictionary) {
+        for friend in friends {
+            if friend.socketId == person["id"] as? String {
+                friend.coordinate = CLLocationCoordinate2D(latitude: person["latitude"] as! CLLocationDegrees, longitude: person["longitude"] as! CLLocationDegrees)
+                setupData()
+                break
+            }
+        }
     }
 }
 

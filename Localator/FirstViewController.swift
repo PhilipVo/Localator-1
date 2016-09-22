@@ -12,7 +12,7 @@ import AudioToolbox
 import MediaPlayer
 import CoreLocation
 
-class FirstViewController: UIViewController {
+class FirstViewController: UIViewController, MapViewControllerDelegate {
     
     let socket = SocketIOClient(socketURL: NSURL(string: "http://samuels-macbook-air-2.local:5000")!, config: [.ForcePolling(true), .ForceNew(true)])
     
@@ -64,17 +64,13 @@ class FirstViewController: UIViewController {
                 if (res[0].objectForKey("error") != nil) {
                     print(error)
                 } else {
-//                    print(res)
                     if let data = res[0]["data"] as? NSDictionary {
                         self.code = String(data["code"]! as! Int)
-                        
-                        print("debug1")
                         
                         if let people = data["people"] {
                             self.friends = people as? [NSDictionary]
                         }
                         
-                        print("debug2")
                         self.performSegueWithIdentifier("mainSegue", sender: self)
                     }
                 }
@@ -91,13 +87,13 @@ class FirstViewController: UIViewController {
         }
         
         socket.on("position") { res, ack in
-            //            print("RECEIVED \(res)")
-            
-//            if let data = res[0] as? NSDictionary {
-//                let person = data["data"]!["person"] as! NSDictionary
-//                self.firstDelegate?.firstViewControllerDelegate(self, didFinishReceivingUpdate: person)
-//                Handle position update on MAP
-//            }
+            if let data = res[0] as? NSDictionary {
+                let person = data["data"]!["person"] as! NSDictionary
+                
+                if (person["id"] as! String) != self.socket.engine?.sid {
+                    self.delegate?.firstViewControllerDelegate(self, positionUpdated: person)
+                }
+            }
         }
         
         socket.connect(timeoutAfter: 5, withTimeoutHandler: {
@@ -114,7 +110,9 @@ class FirstViewController: UIViewController {
             let navController = segue.destinationViewController as! UINavigationController
             let controller = navController.topViewController as! TabBarController
             controller.code = code!
-            delegate = controller.viewControllers![0] as! MapViewController
+            let mapViewController = controller.viewControllers![0] as! MapViewController
+            delegate = mapViewController
+            mapViewController.firstDelegate = self
             
             if let unwrappedFriends = friends {
                 print("debug9")
@@ -221,7 +219,10 @@ class FirstViewController: UIViewController {
     }
     
     
-
-
+    func mapViewControllerDelegate(controller: UIViewController, didUpdateFriends friends: [Friend]) {}
+    
+    func mapViewControllerDelegate(controller: UIViewController, didUpdateLocation coordinate: CLLocationCoordinate2D) {
+        socket.emit("position", ["latitude": coordinate.latitude, "longitude": coordinate.longitude])
+    }
 }
 
