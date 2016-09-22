@@ -15,6 +15,7 @@ class TabBarController: UITabBarController {
     
     @IBAction func onLeave(sender: UIBarButtonItem) {
 //        Handle leave.
+        // TODO: stop vibration/sound
         print("TODO: TabBarController -> Handle Leave")
         dismissViewControllerAnimated(true, completion: nil)
     }

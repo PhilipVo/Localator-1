@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		67B013621D9453B100694FC1 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B013611D9453B100694FC1 /* CameraViewController.swift */; };
+		67B013641D9458A600694FC1 /* CancelButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B013631D9458A600694FC1 /* CancelButtonDelegate.swift */; };
 		67F98EDC1D8B6D330042EFEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F98EDB1D8B6D330042EFEF /* AppDelegate.swift */; };
 		67F98EDE1D8B6D330042EFEF /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F98EDD1D8B6D330042EFEF /* FirstViewController.swift */; };
 		67F98EE11D8B6D330042EFEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67F98EDF1D8B6D330042EFEF /* Main.storyboard */; };
@@ -72,6 +74,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		67B013611D9453B100694FC1 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		67B013631D9458A600694FC1 /* CancelButtonDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CancelButtonDelegate.swift; sourceTree = "<group>"; };
 		67F98ED81D8B6D330042EFEF /* Localator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Localator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67F98EDB1D8B6D330042EFEF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67F98EDD1D8B6D330042EFEF /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -177,7 +181,9 @@
 				67F98F151D8BBF940042EFEF /* Sounds */,
 				67F98EDB1D8B6D330042EFEF /* AppDelegate.swift */,
 				67F98EDD1D8B6D330042EFEF /* FirstViewController.swift */,
+				67B013631D9458A600694FC1 /* CancelButtonDelegate.swift */,
 				67F98EDF1D8B6D330042EFEF /* Main.storyboard */,
+				67B013611D9453B100694FC1 /* CameraViewController.swift */,
 				67F98F101D8B83120042EFEF /* FriendHeaderView.swift */,
 				67F98F0E1D8B768A0042EFEF /* MapViewController.swift */,
 				67F98F161D8C66220042EFEF /* VCMapView.swift */,
@@ -397,7 +403,9 @@
 				67F98F0D1D8B71A60042EFEF /* FriendsViewController.swift in Sources */,
 				7ED14ECE1D9433A300E2D6D9 /* SocketAckEmitter.swift in Sources */,
 				7ED14ED71D9433A300E2D6D9 /* SocketEngineWebsocket.swift in Sources */,
+				67B013641D9458A600694FC1 /* CancelButtonDelegate.swift in Sources */,
 				7ED14EE11D9433A300E2D6D9 /* SocketParsable.swift in Sources */,
+				67B013621D9453B100694FC1 /* CameraViewController.swift in Sources */,
 				7ED14ED61D9433A300E2D6D9 /* SocketEngineSpec.swift in Sources */,
 				7ED14EE21D9433A300E2D6D9 /* SocketStringReader.swift in Sources */,
 				7ED14EDA1D9433A300E2D6D9 /* SocketIOClient.swift in Sources */,
@@ -576,7 +584,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Localator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.LocalatorClone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.Localator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -590,7 +598,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Localator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.LocalatorClone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.Localator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
