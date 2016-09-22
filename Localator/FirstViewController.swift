@@ -74,7 +74,7 @@ class FirstViewController: UIViewController {
         socket.on("room_joined") { res, ack in
             if let data = res[0]["data"] {
                 if let person = data!["person"] {
-                    let friend = Friend(socketId: person!["id"] as! String, title: person!["name"] as! String, locationName: "No idea", coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0))
+                    let friend = Friend(socketId: person!["id"] as! String, title: person!["name"] as! String, locationName: "No idea", coordinate: CLLocationCoordinate2D(latitude: 37.375449, longitude: -121.910541))
                     self.delegate?.firstViewControllerDelegate(self, friendJoined: friend)
                 }
             }
