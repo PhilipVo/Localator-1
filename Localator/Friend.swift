@@ -10,23 +10,26 @@ import MapKit
 import Contacts
 
 class Friend: NSObject, MKAnnotation {
+
+    let socketId: String?
     let title: String?
     let locationName: String
     let location: CLLocation
-    let coordinate: CLLocationCoordinate2D
+    var coordinate: CLLocationCoordinate2D
     let color: String
+    var lastUpdate: NSDate?
     
     var subtitle: String? {
         return locationName
     }
     
-    init(title: String, locationName: String, coordinate: CLLocationCoordinate2D) {
+    init(socketId: String, title: String, locationName: String, coordinate: CLLocationCoordinate2D) {
+        self.socketId = socketId
         self.title = title
         self.locationName = locationName
         self.location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         self.coordinate = coordinate
         self.color = "Normal"
-        
         super.init()
     }
     
@@ -48,5 +51,9 @@ class Friend: NSObject, MKAnnotation {
         default:
             return UIColor.redColor()
         }
+    }
+
+    func clone() -> Friend {
+        return Friend(socketId: socketId!, title: title!, locationName: locationName, coordinate: coordinate)
     }
 }

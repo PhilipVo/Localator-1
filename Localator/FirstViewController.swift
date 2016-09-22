@@ -13,57 +13,78 @@ import MediaPlayer
 
 class FirstViewController: UIViewController {
     
-
+    let socket = SocketIOClient(socketURL: NSURL(string: "http://samuels-macbook-air-2.local:5000")!, config: [.ForcePolling(true), .ForceNew(true)])
+    var code: String?
+    
+    @IBOutlet weak var nameField: UITextField!
+    
     @IBAction func onCreateButtonPressed(sender: UIButton) {
-        performSegueWithIdentifier("toMap", sender: sender)
-    }
-    
-    
-    // MARK: audio 
-    // TODO: force volume to highest level
-    var audioPlayer = AVAudioPlayer()
-    var isPlaying = false
-    var alarmSound : AVAudioPlayer?
-    
-    
-//    let volumeView = MPVolumeView()
-//    if let view = volumeView.subviews.first as? UISlider{
-//        view.value = 0.1 //---0 t0 1.0---
-//    }
-//    
-    @IBAction func onSoundButtonPressed(sender: UIButton) {
-        if isPlaying == true {
-            alarmSound?.stop()
-            isPlaying = false
-        } else {
-            alarmSound?.play()
-            isPlaying = true
-        }
-        
-    }
-    
-    
-    func setupAudioPlayerWithFile(file:NSString, type:NSString) -> AVAudioPlayer?  {
-        let path = NSBundle.mainBundle().pathForResource(file as String, ofType: type as String)
-        let url = NSURL.fileURLWithPath(path!)
-        var audioPlayer:AVAudioPlayer?
-        
-        do {
-            try audioPlayer = AVAudioPlayer(contentsOfURL: url)
-        } catch {
-            print("Player not available")
-        }
-        
-        return audioPlayer
+//        performSegueWithIdentifier("mainSegue", sender: sender)
+        socket.emit("room_created", ["name": nameField.text!])
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        nameField.text = UIDevice.currentDevice().name
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tap)
+        
+        socket.on("connect") { data, ack in
+            NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: #selector(self.validateCon), userInfo: nil, repeats: true)
+        }
+        
+        socket.on("disconnect") { data, ack in
+            print("Disconnected :(")
+        }
+        
+        socket.on("response") { res, ack in
+            if let error = res[0]["error"] {
+                if (res[0].objectForKey("error") != nil) {
+                    print(error)
+                } else {
+                    if let data = res[0] as? NSDictionary {
+                        self.code = String(data["data"]!["code"]! as! Int)
+                        self.performSegueWithIdentifier("mainSegue", sender: self)
+                    }
+                }
+            }
+        }
+        
+        socket.on("position") { res, ack in
+            //            print("RECEIVED \(res)")
+            
+//            if let data = res[0] as? NSDictionary {
+//                let person = data["data"]!["person"] as! NSDictionary
+//                self.firstDelegate?.firstViewControllerDelegate(self, didFinishReceivingUpdate: person)
+//                Handle position update on MAP
+//            }
+        }
+        
+        socket.connect(timeoutAfter: 5, withTimeoutHandler: {
+            print("Connection failed :(")
+        })
+        
         if let alarmSound = self.setupAudioPlayerWithFile("alarm-clock-ticking", type:"wav") {
             self.alarmSound = alarmSound
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "mainSegue" {
+            let navController = segue.destinationViewController as! UINavigationController
+            let controller = navController.topViewController as! TabBarController
+            controller.code = code!
+        }
+    }
+    
+    func validateCon() {
+        print("Connection is \((socket.engine?.connected)! ? "valid" : "invalid")")
+    }
+    
+    func hideKeyboard() {
+        view.endEditing(true)
+    }
     
     // MARK: flashlight
     // on/off capability
@@ -106,6 +127,42 @@ class FirstViewController: UIViewController {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
         sleep(1)
         }
+    }
+    
+    // MARK: audio
+    // TODO: force volume to highest level
+    var audioPlayer = AVAudioPlayer()
+    var isPlaying = false
+    var alarmSound : AVAudioPlayer?
+    
+    //    let volumeView = MPVolumeView()
+    //    if let view = volumeView.subviews.first as? UISlider{
+    //        view.value = 0.1 //---0 t0 1.0---
+    //    }
+    
+    @IBAction func onSoundButtonPressed(sender: UIButton) {
+        if isPlaying == true {
+            alarmSound?.stop()
+            isPlaying = false
+        } else {
+            alarmSound?.play()
+            isPlaying = true
+        }
+        
+    }
+    
+    func setupAudioPlayerWithFile(file:NSString, type:NSString) -> AVAudioPlayer?  {
+        let path = NSBundle.mainBundle().pathForResource(file as String, ofType: type as String)
+        let url = NSURL.fileURLWithPath(path!)
+        var audioPlayer:AVAudioPlayer?
+        
+        do {
+            try audioPlayer = AVAudioPlayer(contentsOfURL: url)
+        } catch {
+            print("Player not available")
+        }
+        
+        return audioPlayer
     }
     
 

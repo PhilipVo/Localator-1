@@ -1,47 +1,43 @@
-//
-//  FriendsViewController.swift
-//  Localator
-//
-//  Created by Vanessa Bell on 9/15/16.
-//  Copyright © 2016 Vanessa Bell. All rights reserved.
-//
-
 import UIKit
 
-class FriendsViewController: UICollectionViewController {
+class FriendsViewController: UICollectionViewController, MapViewControllerDelegate {
     
-    var friends = [1,2,3,4]
+    var friends = [Friend]()
     
-    @IBAction func onCancelBarButtonPressed(sender: UIBarButtonItem) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        collectionView?.backgroundColor = UIColor(red: 113.0 / 255.0, green: 197.0 / 255.0, blue: 207.0 / 255.0, alpha: 1.0)
+        
+        if let rect = navigationController?.navigationBar.frame {
+            let y = rect.size.height + rect.origin.y
+            collectionView?.contentInset = UIEdgeInsetsMake(y, 10, 50, 10)
+        }
+        
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.minimumInteritemSpacing = 5
+        layout.minimumLineSpacing = 10
+        collectionView!.collectionViewLayout = layout
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-    
-    // MARK: Collection View
     
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
+    
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return friends.count
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("FriendCell", forIndexPath: indexPath)
-        cell.backgroundColor = UIColor.grayColor()
-        // Configure the cell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("FriendCell", forIndexPath: indexPath) as! FriendCell
+        cell.backgroundColor = UIColor.yellowColor()
+        cell.nameLabel.text = friends[indexPath.row].title
         return cell
     }
     
-    // header. TODO: do not include header if coming from
     override func collectionView(collectionView: UICollectionView,viewForSupplementaryElementOfKind kind: String,atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionElementKindSectionHeader:
@@ -53,7 +49,6 @@ class FriendsViewController: UICollectionViewController {
         }
     }
     
-    // MARK: Delegate Flow Layout
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return CGSize(width: 100, height: 100)
     }
@@ -61,6 +56,9 @@ class FriendsViewController: UICollectionViewController {
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 10,left: 10,bottom: 10,right: 10)
     }
-
     
+    func mapViewControllerDelegate(controller: UIViewController, didUpdateFriends friends: [Friend]) {
+        self.friends = friends
+        self.collectionView?.reloadData()
+    }
 }

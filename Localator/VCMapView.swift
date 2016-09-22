@@ -13,16 +13,22 @@ import AudioToolbox
 extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     
     func loop() {
+        testMen.coordinate = CLLocationCoordinate2D(latitude: testMen.coordinate.latitude + 0.00001, longitude: testMen.coordinate.longitude + 0.00001)
+//        print("Coordinate updated to \(testMen.coordinate)")
+        let clone = testMen.clone()
+        mapView.addAnnotation(clone)
+        mapView.removeAnnotation(testMen)
+        testMen = clone
+        
         if self.distance < 30 {
             UIView.animateWithDuration(distance/60.0, delay: 0.0, options: UIViewAnimationOptions.ShowHideTransitionViews, animations: {
                 
                 if self.alertsLabel.alpha == 0.0 {
                     self.alertsLabel.alpha = 1.0
-                }
-                else {
+                } else {
                     self.alertsLabel.alpha = 0.3
                 }
-                }, completion: nil)
+            }, completion: nil)
             alarmSound?.stop()
             alarmSound?.play()
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
@@ -52,7 +58,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     func setupData() {
         // 1. check if system can monitor regions
         if CLLocationManager.isMonitoringAvailableForClass(CLCircularRegion.self) {
-            
             for friend in friends {
                 // 2. region data
                 let title = friend.title
@@ -70,6 +75,8 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 let circle = MKCircle(centerCoordinate: coordinate, radius: regionRadius)
                 mapView.addOverlay(circle)
             }
+            
+            mapView.addAnnotation(testMen)
         }
         else {
             print("System can't track regions")
@@ -104,8 +111,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         return nil
     }
     
-    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView,
-                 calloutAccessoryControlTapped control: UIControl) {
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let location = view.annotation as! Friend
         let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
         location.mapItem().openInMapsWithLaunchOptions(launchOptions)
@@ -116,26 +122,25 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         alertsLabel.text = "Distance: " + String(Int(distance)) + " (meters)"
         if distance < 30 {
             self.alertsLabel.backgroundColor = UIColor.redColor()
-        }
-        else {
+        } else {
             self.alertsLabel.backgroundColor = UIColor.blackColor()
             
         }
-        //        alertsLabel.backgroundColor = UIColor(red: 255/255.0, green: 0.0, blue: 0.0, alpha: CGFloat(1/distance))
-        //        if !isInitialized {
-        //            isInitialized = true
-        //
-        //            let userLoction: CLLocation = locations[0]
-        //            let latitude = userLoction.coordinate.latitude
-        //            let longitude = userLoction.coordinate.longitude
-        //            let latDelta: CLLocationDegrees = 0.001
-        //            let lonDelta: CLLocationDegrees = 0.001
-        //            let span:MKCoordinateSpan = MKCoordinateSpanMake(latDelta, lonDelta)
-        //            let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
-        //            let region: MKCoordinateRegion = MKCoordinateRegionMake(location, span)
-        //            mapView.setRegion(region, animated: true)
-        //            mapView.showsUserLocation = true
-        //        }
+//                alertsLabel.backgroundColor = UIColor(red: 255/255.0, green: 0.0, blue: 0.0, alpha: CGFloat(1/distance))
+//                if !isInitialized {
+//                    isInitialized = true
+//        
+//                    let userLoction: CLLocation = locations[0]
+//                    let latitude = userLoction.coordinate.latitude
+//                    let longitude = userLoction.coordinate.longitude
+//                    let latDelta: CLLocationDegrees = 0.001
+//                    let lonDelta: CLLocationDegrees = 0.001
+//                    let span:MKCoordinateSpan = MKCoordinateSpanMake(latDelta, lonDelta)
+//                    let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
+//                    let region: MKCoordinateRegion = MKCoordinateRegionMake(location, span)
+//                    mapView.setRegion(region, animated: true)
+//                    mapView.showsUserLocation = true
+//                }
     }
     
 }

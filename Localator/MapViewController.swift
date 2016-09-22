@@ -17,10 +17,12 @@ class MapViewController: UIViewController {
     @IBOutlet weak var alertsLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     
+    var delegate: MapViewControllerDelegate?
+    
     let locationManager = CLLocationManager()
     let regionRadius = 30.0
     
-    var friends: [Friend] = []
+    var friends = [Friend]()
     var monitoredRegions: Dictionary<String, NSDate> = [:]
     var distance = 100.0
     var isInitialized = false
@@ -34,18 +36,13 @@ class MapViewController: UIViewController {
         
         let alertController = UIAlertController(title: "Disclaimer", message:
             "Welcome", preferredStyle: UIAlertControllerStyle.Alert)
-        alertController.addAction(UIAlertAction(title: "Accept", style: UIAlertActionStyle.Default,handler: nil))
+        alertController.addAction(UIAlertAction(title: "Accept", style: UIAlertActionStyle.Default, handler: nil))
         
-        // 1. status is not determined
         if CLLocationManager.authorizationStatus() == .NotDetermined {
             locationManager.requestAlwaysAuthorization()
-        }
-            // 2. authorization were denied
-        else if CLLocationManager.authorizationStatus() == .Denied {
+        } else if CLLocationManager.authorizationStatus() == .Denied {
             locationManager.requestAlwaysAuthorization()
-        }
-            // 3. we do have authorization
-        else if CLLocationManager.authorizationStatus() == .AuthorizedAlways {
+        } else if CLLocationManager.authorizationStatus() == .AuthorizedAlways {
             locationManager.startUpdatingLocation()
         }
     }
@@ -55,27 +52,25 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // locationManage setup:
+        delegate = tabBarController?.viewControllers![1] as! FriendsViewController
+        
         locationManager.delegate = self;
         locationManager.distanceFilter = 1;
         locationManager.desiredAccuracy = kCLLocationAccuracyBest;
         locationManager.pausesLocationUpdatesAutomatically = false
         
-        // mapView setup:
         mapView.delegate = self
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .Follow
-        
-        // Add friends to map:
-        let friend = Friend(title: "Philip Vo", locationName: "Coding Dojo's Parking Lot",
+
+        let friend = Friend(socketId: "21eqwdshuiwqs", title: "Samuel's iPhone", locationName: "Coding Dojo's Parking Lot",
                             coordinate: CLLocationCoordinate2D(latitude: 37.375449, longitude: -121.910541))
         friends.append(friend)
+        delegate?.mapViewControllerDelegate(self, didUpdateFriends: friends)
         
-        // Setup sound:
         if let alarmSound = self.setupAudioPlayerWithFile("beep", type:"wav") {
             self.alarmSound = alarmSound
         }
-        
         
         setupData()
         timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(loop), userInfo: nil, repeats: true)
@@ -86,5 +81,7 @@ class MapViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    var testMen = Friend(socketId: "/#xBVGTV8QBlKbWrNBABBE", title: "HeLLO", locationName: "NULL", coordinate: CLLocationCoordinate2D(latitude: 37.375449, longitude: -121.910541));
 }
 
