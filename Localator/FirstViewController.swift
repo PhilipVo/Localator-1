@@ -56,7 +56,8 @@ class FirstViewController: UIViewController, CancelButtonDelegate, MapViewContro
         view.addGestureRecognizer(tap)
         
         socket.on("connect") { data, ack in
-            NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: #selector(self.validateCon), userInfo: nil, repeats: true)
+            print("CONNECTED TO THE SERVER")
+//            NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: #selector(self.validateCon), userInfo: nil, repeats: true)
         }
         
         socket.on("disconnect") { data, ack in
@@ -121,14 +122,13 @@ class FirstViewController: UIViewController, CancelButtonDelegate, MapViewContro
             mapViewController.firstDelegate = self
             
             if let unwrappedFriends = friends {
-                print("debug9")
-                
                 for person in unwrappedFriends {
                     let friend = Friend(socketId: person["id"] as! String, title: person["name"] as! String, locationName: "No idea", coordinate: CLLocationCoordinate2D(latitude: 37.375449, longitude: -121.910541))
                     delegate?.firstViewControllerDelegate(self, friendJoined: friend)
                 }
             }
         }
+        
         if segue.identifier == "cameraSegue" {
             let navController = segue.destinationViewController as! UINavigationController
             let controller = navController.topViewController as! CameraViewController

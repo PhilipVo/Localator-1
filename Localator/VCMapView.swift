@@ -22,6 +22,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                     self.alertsLabel.alpha = 0.3
                 }
             }, completion: nil)
+            
             alarmSound?.stop()
             alarmSound?.play()
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
@@ -65,11 +66,11 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 mapView.addAnnotation(clone)
                 mapView.removeAnnotation(friend)
                 friends[i] = clone
-                mapView.addAnnotation(friend)
+                mapView.addAnnotation(clone)
                 
                 // 5. setup circle
-                let circle = MKCircle(centerCoordinate: coordinate, radius: regionRadius)
-                mapView.addOverlay(circle)
+//                let circle = MKCircle(centerCoordinate: coordinate, radius: regionRadius)
+//                mapView.addOverlay(circle)
             }
         }
         else {
