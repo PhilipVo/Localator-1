@@ -13,12 +13,12 @@ import AudioToolbox
 extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     
     func loop() {
-        testMen.coordinate = CLLocationCoordinate2D(latitude: testMen.coordinate.latitude + 0.00001, longitude: testMen.coordinate.longitude + 0.00001)
-//        print("Coordinate updated to \(testMen.coordinate)")
-        let clone = testMen.clone()
-        mapView.addAnnotation(clone)
-        mapView.removeAnnotation(testMen)
-        testMen = clone
+//        testMen.coordinate = CLLocationCoordinate2D(latitude: testMen.coordinate.latitude + 0.00001, longitude: testMen.coordinate.longitude + 0.00001)
+////        print("Coordinate updated to \(testMen.coordinate)")
+//        let clone = testMen.clone()
+//        mapView.addAnnotation(clone)
+//        mapView.removeAnnotation(testMen)
+//        testMen = clone
         
         if self.distance < 30 {
             UIView.animateWithDuration(distance/60.0, delay: 0.0, options: UIViewAnimationOptions.ShowHideTransitionViews, animations: {
@@ -58,8 +58,9 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     func setupData() {
         // 1. check if system can monitor regions
         if CLLocationManager.isMonitoringAvailableForClass(CLCircularRegion.self) {
-            for friend in friends {
+            for i in 0..<friends.count {
                 // 2. region data
+                let friend = friends[i]
                 let title = friend.title
                 let coordinate = friend.coordinate
                 
@@ -69,14 +70,18 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 locationManager.startMonitoringForRegion(region)
                 
                 // 4. setup annotation
-                mapView.addAnnotation(friend)
+                let clone = friend.clone()
+                mapView.addAnnotation(clone)
+                mapView.removeAnnotation(friend)
+                friends[i] = clone
+                mapView.addAnnotation(clone)
                 
                 // 5. setup circle
                 let circle = MKCircle(centerCoordinate: coordinate, radius: regionRadius)
                 mapView.addOverlay(circle)
             }
             
-            mapView.addAnnotation(testMen)
+//            mapView.addAnnotation(testMen)
         }
         else {
             print("System can't track regions")

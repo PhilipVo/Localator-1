@@ -63,9 +63,9 @@ class MapViewController: UIViewController, FirstViewControllerDelegate {
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .Follow
 
-        let friend = Friend(socketId: "21eqwdshuiwqs", title: "Samuel's iPhone", locationName: "Coding Dojo's Parking Lot",
-                            coordinate: CLLocationCoordinate2D(latitude: 37.375449, longitude: -121.910541))
-        friends.append(friend)
+//        let friend = Friend(socketId: "21eqwdshuiwqs", title: "Samuel's iPhone", locationName: "Coding Dojo's Parking Lot",
+//                            coordinate: CLLocationCoordinate2D(latitude: 37.375449, longitude: -121.910541))
+//        friends.append(friend)
         delegate?.mapViewControllerDelegate(self, didUpdateFriends: friends)
         
         if let alarmSound = self.setupAudioPlayerWithFile("beep", type:"wav") {
@@ -86,6 +86,7 @@ class MapViewController: UIViewController, FirstViewControllerDelegate {
     
     func firstViewControllerDelegate(controller: UIViewController, friendJoined friend: Friend) {
         friends.append(friend)
+        setupData()
         delegate?.mapViewControllerDelegate(self, didUpdateFriends: friends)
     }
 }
