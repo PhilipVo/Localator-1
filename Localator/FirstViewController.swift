@@ -65,6 +65,16 @@ class FirstViewController: UIViewController {
                 } else {
                     if let data = res[0] as? NSDictionary {
                         self.code = String(data["data"]!["code"]! as! Int)
+                        
+                        if let people = data["people"] {
+                            for i in people as! NSArray {
+                                let person = people[i] as! NSDictionary
+                                let friend = Friend(socketId: person["id"] as! String, title: person["name"] as! String, locationName: "No idea", coordinate: CLLocationCoordinate2D(latitude: 37.375449, longitude: -121.910541))
+                                self.delegate?.firstViewControllerDelegate(self, friendJoined: friend)
+                                
+                            }
+                        }
+                        
                         self.performSegueWithIdentifier("mainSegue", sender: self)
                     }
                 }
