@@ -112,6 +112,7 @@ class MapViewController: UIViewController, FirstViewControllerDelegate {
                     let decodedData = NSData(base64EncodedString: person["image"] as! String, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
                     let backToImage = UIImage(data: decodedData)!
                     friend.imageView = UIImageView(image: backToImage)
+                    self.delegate?.mapViewControllerDelegate(self, didUpdateFriends: self.friends)
                     break
                 }
             }
