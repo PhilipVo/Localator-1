@@ -63,8 +63,8 @@ class FirstViewController: UIViewController {
                 if (res[0].objectForKey("error") != nil) {
                     print(error)
                 } else {
-                    if let data = res[0] as? NSDictionary {
-                        self.code = String(data["data"]!["code"]! as! Int)
+                    if let data = res[0]["data"] as? NSDictionary {
+                        self.code = String(data["code"]! as! Int)
                         
                         if let people = data["people"] {
                             for i in people as! NSArray {
