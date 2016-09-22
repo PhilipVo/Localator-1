@@ -50,6 +50,7 @@
 		7ED14EE51D9433A300E2D6D9 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED14ECD1D9433A300E2D6D9 /* WebSocket.swift */; };
 		7ED14EE71D94375E00E2D6D9 /* MapViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED14EE61D94375E00E2D6D9 /* MapViewControllerDelegate.swift */; };
 		7ED14EE91D94455B00E2D6D9 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED14EE81D94455B00E2D6D9 /* FriendCell.swift */; };
+		7ED14EEB1D94490E00E2D6D9 /* FirstViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED14EEA1D94490E00E2D6D9 /* FirstViewControllerDelegate.swift */; };
 		7EF2B7951D937A3B0013272B /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF2B7941D937A3B0013272B /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
@@ -120,6 +121,7 @@
 		7ED14ECD1D9433A300E2D6D9 /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		7ED14EE61D94375E00E2D6D9 /* MapViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewControllerDelegate.swift; sourceTree = "<group>"; };
 		7ED14EE81D94455B00E2D6D9 /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
+		7ED14EEA1D94490E00E2D6D9 /* FirstViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewControllerDelegate.swift; sourceTree = "<group>"; };
 		7EF2B7941D937A3B0013272B /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -188,6 +190,7 @@
 				7EF2B7941D937A3B0013272B /* TabBarController.swift */,
 				7ED14EE61D94375E00E2D6D9 /* MapViewControllerDelegate.swift */,
 				7ED14EE81D94455B00E2D6D9 /* FriendCell.swift */,
+				7ED14EEA1D94490E00E2D6D9 /* FirstViewControllerDelegate.swift */,
 			);
 			path = Localator;
 			sourceTree = "<group>";
@@ -424,6 +427,7 @@
 				7ED14ED11D9433A300E2D6D9 /* SocketClientManager.swift in Sources */,
 				7ED14ED31D9433A300E2D6D9 /* SocketEngineClient.swift in Sources */,
 				7ED14ED51D9433A300E2D6D9 /* SocketEnginePollable.swift in Sources */,
+				7ED14EEB1D94490E00E2D6D9 /* FirstViewControllerDelegate.swift in Sources */,
 				67F98F191D8C66360042EFEF /* Friend.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

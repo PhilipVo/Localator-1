@@ -12,7 +12,7 @@ import AVFoundation
 import AudioToolbox
 import MediaPlayer
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, FirstViewControllerDelegate {
     
     @IBOutlet weak var alertsLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
@@ -83,5 +83,10 @@ class MapViewController: UIViewController {
     }
     
     var testMen = Friend(socketId: "/#xBVGTV8QBlKbWrNBABBE", title: "HeLLO", locationName: "NULL", coordinate: CLLocationCoordinate2D(latitude: 37.375449, longitude: -121.910541));
+    
+    func firstViewControllerDelegate(controller: UIViewController, friendJoined friend: Friend) {
+        friends.append(friend)
+        delegate?.mapViewControllerDelegate(self, didUpdateFriends: friends)
+    }
 }
 

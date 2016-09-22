@@ -28,6 +28,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H1B-LT-BoE">
                                 <rect key="frame" x="114" y="393" width="93" height="30"/>
                                 <state key="normal" title="Join a Search"/>
+                                <connections>
+                                    <action selector="onJoinButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cHT-my-wta"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E01-rC-grh">
                                 <rect key="frame" x="71" y="268" width="179" height="30"/>

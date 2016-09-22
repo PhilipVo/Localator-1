@@ -10,17 +10,37 @@ import UIKit
 import AVFoundation
 import AudioToolbox
 import MediaPlayer
+import CoreLocation
 
 class FirstViewController: UIViewController {
     
     let socket = SocketIOClient(socketURL: NSURL(string: "http://samuels-macbook-air-2.local:5000")!, config: [.ForcePolling(true), .ForceNew(true)])
+    
     var code: String?
+    var delegate: FirstViewControllerDelegate?
     
     @IBOutlet weak var nameField: UITextField!
     
     @IBAction func onCreateButtonPressed(sender: UIButton) {
 //        performSegueWithIdentifier("mainSegue", sender: sender)
         socket.emit("room_created", ["name": nameField.text!])
+    }
+    
+    @IBAction func onJoinButtonPressed(sender: UIButton) {
+        let alert = UIAlertController(title: "Join a Room", message: "Enter a code in the box!", preferredStyle: .Alert)
+        
+        alert.addTextFieldWithConfigurationHandler({ (textField) -> Void in
+            textField.placeholder = "Type a code..."
+        })
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+            let textField = alert.textFields![0] as UITextField
+            self.code = textField.text
+            
+            self.socket.emit("room_joined", ["name": self.nameField.text!, "code": self.code!])
+        }))
+        
+        presentViewController(alert, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -51,6 +71,15 @@ class FirstViewController: UIViewController {
             }
         }
         
+        socket.on("room_joined") { res, ack in
+            if let data = res[0]["data"] {
+                if let person = data!["person"] {
+                    let friend = Friend(socketId: person!["id"] as! String, title: person!["name"] as! String, locationName: "No idea", coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0))
+                    self.delegate?.firstViewControllerDelegate(self, friendJoined: friend)
+                }
+            }
+        }
+        
         socket.on("position") { res, ack in
             //            print("RECEIVED \(res)")
             
@@ -75,6 +104,7 @@ class FirstViewController: UIViewController {
             let navController = segue.destinationViewController as! UINavigationController
             let controller = navController.topViewController as! TabBarController
             controller.code = code!
+            delegate = controller.viewControllers![0] as! MapViewController
         }
     }
     

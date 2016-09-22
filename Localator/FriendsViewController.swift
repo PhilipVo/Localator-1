@@ -61,4 +61,6 @@ class FriendsViewController: UICollectionViewController, MapViewControllerDelega
         self.friends = friends
         self.collectionView?.reloadData()
     }
+    
+    func MapViewControllerDelegate(controller: UIViewController, newFriendJoined: Friend) {}
 }
