@@ -87,6 +87,8 @@ class FirstViewController: UIViewController, MapViewControllerDelegate {
         }
         
         socket.on("position") { res, ack in
+            print("Received position data \(res)")
+            
             if let data = res[0] as? NSDictionary {
                 let person = data["data"]!["person"] as! NSDictionary
                 
@@ -222,6 +224,7 @@ class FirstViewController: UIViewController, MapViewControllerDelegate {
     func mapViewControllerDelegate(controller: UIViewController, didUpdateFriends friends: [Friend]) {}
     
     func mapViewControllerDelegate(controller: UIViewController, didUpdateLocation coordinate: CLLocationCoordinate2D) {
+        print("You moved, location sent to server.")
         socket.emit("position", ["latitude": coordinate.latitude, "longitude": coordinate.longitude])
     }
 }

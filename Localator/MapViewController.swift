@@ -93,6 +93,7 @@ class MapViewController: UIViewController, FirstViewControllerDelegate {
     func firstViewControllerDelegate(controller: UIViewController, positionUpdated person: NSDictionary) {
         for friend in friends {
             if friend.socketId == person["id"] as? String {
+                print("Found, updating location of \(person["id"])")
                 friend.coordinate = CLLocationCoordinate2D(latitude: person["latitude"] as! CLLocationDegrees, longitude: person["longitude"] as! CLLocationDegrees)
                 setupData()
                 break
