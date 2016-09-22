@@ -51,6 +51,7 @@ class CameraViewController: UIViewController {
         }
     }
     @IBAction func TakePhoto(sender: AnyObject) {
+        print("photo button pressed")
         if let videoConnection = sessionOutput.connectionWithMediaType(AVMediaTypeVideo){
             sessionOutput.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: {
                 buffer, error in
@@ -58,6 +59,17 @@ class CameraViewController: UIViewController {
                 UIImageWriteToSavedPhotosAlbum(UIImage(data: imageData)!, nil, nil, nil)
             })
         }
+        
+        // Flash the screen white and fade it out
+        let aView = UIView(frame: self.view.frame)
+        aView.backgroundColor = UIColor.whiteColor()
+        self.view.addSubview(aView)
+        
+        UIView.animateWithDuration(1.3, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+            aView.alpha = 0.0
+            }, completion: { (done) -> Void in
+                aView.removeFromSuperview()
+        })
     }
     
     

@@ -24,15 +24,8 @@
                                     <constraint firstAttribute="width" constant="200" id="dB1-se-gzM"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="vgl-tV-Cd9">
-                                <rect key="frame" x="150" y="380" width="300" height="200"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="0wD-Ai-ciX"/>
-                                    <constraint firstAttribute="height" constant="200" id="LJ1-Wk-HYr"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brought to you by:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zn9-GW-Sab">
-                                <rect key="frame" x="230" y="329" width="141" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Version 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zn9-GW-Sab">
+                                <rect key="frame" x="265" y="329" width="72" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -40,10 +33,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="vgl-tV-Cd9" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="4oQ-yu-7sw"/>
                             <constraint firstItem="AlV-Ha-poY" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="PIr-SD-hr2"/>
                             <constraint firstItem="zn9-GW-Sab" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="WbR-7G-u0P"/>
-                            <constraint firstItem="vgl-tV-Cd9" firstAttribute="top" secondItem="zn9-GW-Sab" secondAttribute="bottom" constant="30" id="bT0-sT-C7e"/>
                             <constraint firstItem="AlV-Ha-poY" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="40" id="gze-w6-Wks"/>
                             <constraint firstItem="zn9-GW-Sab" firstAttribute="top" secondItem="AlV-Ha-poY" secondAttribute="bottom" constant="69" id="nYy-EW-IXh"/>
                         </constraints>
@@ -55,7 +46,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Image" width="400" height="300"/>
         <image name="Image-1" width="575" height="575"/>
     </resources>
 </document>

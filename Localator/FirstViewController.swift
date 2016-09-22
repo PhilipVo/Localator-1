@@ -16,6 +16,7 @@ class FirstViewController: UIViewController, CancelButtonDelegate {
     
     let socket = SocketIOClient(socketURL: NSURL(string: "http://samuels-macbook-air-2.local:5000")!, config: [.ForcePolling(true), .ForceNew(true)])
     
+    var window: UIWindow?
     var code: String?
     var friends: [NSDictionary]?
     var delegate: FirstViewControllerDelegate?
@@ -34,12 +35,22 @@ class FirstViewController: UIViewController, CancelButtonDelegate {
             textField.placeholder = "Type a code..."
         })
         
+        //Handler for actions
+        let actionAndDismiss = {
+            (action: String?) -> ((UIAlertAction!) -> ()) in
+            return {
+                _ in
+                self.window?.rootViewController?.dismissViewControllerAnimated(true, completion: nil)
+            }
+        }
+        
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
             let textField = alert.textFields![0] as UITextField
             self.code = textField.text
             
             self.socket.emit("room_joined", ["name": self.nameField.text!, "code": self.code!])
         }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: actionAndDismiss(nil)))
         
         presentViewController(alert, animated: true, completion: nil)
     }
